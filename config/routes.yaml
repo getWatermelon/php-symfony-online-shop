@@ -1,3 +1,16 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+category_index:
+    path: /category/{id}
+    controller: App\Controller\ListController::index
+
+product_show:
+    path: /product/{id}
+    controller: App\Controller\ProductController::index
+
+product_add_vote:
+    path: /product/{id}/vote
+    methods:    POST
+    controller: App\Controller\ProductController::addVote

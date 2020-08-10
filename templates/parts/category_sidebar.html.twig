@@ -1,0 +1,65 @@
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        {% for cat in navigation.getMenu %}
+            {% if cat.categories.isEmpty %}
+                <li><a href="{{ path('category_index', {'id': cat.id}) }}">{{ cat.title }}</a></li>
+            {% else %}
+                <li class="dropdown mega-dropdown active">
+{#                    <a href="{{ path('category_index', {'id': cat.id}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ cat.title }}<span class="caret"></span></a>#}
+                    <a href="{{ path('category_index', {'id': cat.id}) }}" class="dropdown-toggle">{{ cat.title }}<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                {% for subcat in cat.categories %}
+                                    <li><a href="{{ path('category_index', {'id': subcat.id}) }}" >{{ subcat.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+{#        {% for cat in navigation.getMenu %}#}
+
+{#                                    <li><a href="#">{{ cat.title }}</a></li>#}
+
+{#        {% endfor %}#}
+{#                <li class="dropdown mega-dropdown active">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Veggies & Fruits<span class="caret"></span></a>#}
+{#                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">#}
+{#                        <div class="w3ls_vegetables">#}
+{#                            <ul>#}
+{#                                <li><a href="vegetables.html">Vegetables</a></li>#}
+{#                                <li><a href="vegetables.html">Fruits</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li><a href="kitchen.html">Kitchen</a></li>#}
+{#                <li><a href="short-codes.html">Short Codes</a></li>#}
+{#                <li class="dropdown">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beverages<span class="caret"></span></a>#}
+{#                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">#}
+{#                        <div class="w3ls_vegetables">#}
+{#                            <ul>#}
+{#                                <li><a href="drinks.html">Soft Drinks</a></li>#}
+{#                                <li><a href="drinks.html">Juices</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li><a href="pet.html">Pet Food</a></li>#}
+{#                <li class="dropdown">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Frozen Foods<span class="caret"></span></a>#}
+{#                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">#}
+{#                        <div class="w3ls_vegetables">#}
+{#                            <ul>#}
+{#                                <li><a href="frozen.html">Frozen Snacks</a></li>#}
+{#                                <li><a href="frozen.html">Frozen Nonveg</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li><a href="bread.html">Bread & Bakery</a></li>#}
+    </ul>
+</div><!-- /.navbar-collapse -->
