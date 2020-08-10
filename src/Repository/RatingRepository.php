@@ -19,6 +19,11 @@ class RatingRepository extends ServiceEntityRepository
         parent::__construct($registry, Rating::class);
     }
 
+    public function getProductByIds()
+    {
+
+    }
+
     // /**
     //  * @return Rating[] Returns an array of Rating objects
     //  */

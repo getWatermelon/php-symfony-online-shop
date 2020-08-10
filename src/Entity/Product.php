@@ -53,11 +53,13 @@ class Product
      */
     private $categories;
 
+
     public function __construct()
     {
         $this->price = new ArrayCollection();
         $this->rating = new ArrayCollection();
         $this->categories = new ArrayCollection();
+//        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int

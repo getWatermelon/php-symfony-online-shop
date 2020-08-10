@@ -1,3 +1,10 @@
+<h1>
+    {% if app.session.get('order') is not empty %}
+        <h1>{{ dump(app.session.get('order')) }}</h1>
+    {% else %}
+        <h1>Session is empty</h1>
+    {% endif %}
+</h1>
 <div class="agileits_header">
     <div class="w3l_offers">
         <a href="products.html">Today's special Offers !</a>
@@ -13,7 +20,7 @@
             <fieldset>
                 <input type="hidden" name="cmd" value="_cart" />
                 <input type="hidden" name="display" value="1" />
-                <input type="submit" name="submit" value="View your cart" class="button" />
+                <input type="submit" name="submit" id="show_cart" value="View your cart" class="button" />
             </fieldset>
         </form>
     </div>
