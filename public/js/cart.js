@@ -7,11 +7,12 @@ $(function() {
         }
     );
 
-    $('#show_cart').on('click', function (event) {
+    $('#show_cart').on('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
         $.post(`/product/show_cart`)
-            .done(function (html) {
+            .done(function(html) {
+                $('#exampleModal').remove();
                 $('body').append(html);
                 $('#exampleModal').modal('show');
             });

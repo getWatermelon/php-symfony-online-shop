@@ -1,3 +1,4 @@
+{% block body %}
 <h1>
     {% if app.session.get('order') is not empty %}
         <h1>{{ dump(app.session.get('order')) }}</h1>
@@ -93,3 +94,4 @@
     </div>
 </div>
 <!-- //products-breadcrumb -->
+{% endblock %}

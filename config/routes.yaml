@@ -26,3 +26,8 @@ product_show_cart:
     path: /product/show_cart
     methods:    POST
     controller: App\Controller\ProductController::showCart
+
+checkout:
+    path: /checkout
+    methods:    [GET, POST]
+    controller: App\Controller\CheckoutController::index

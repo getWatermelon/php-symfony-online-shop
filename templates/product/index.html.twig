@@ -529,8 +529,8 @@
         let TOKEN = '{{ csrf_token('add_to_cart') }}';
     </script>
     <script src="{{ asset('js/vote.js') }}"></script>
+    <script src=" {{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/cart.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function(){
             $(".dropdown").hover(
@@ -556,32 +556,26 @@
                 easingType: 'linear'
                 };
             */
-
             $().UItoTop({ easingType: 'easeOutQuart' });
-
         });
     </script>
     <!-- //here ends scrolling icon -->
     <script src="/js/minicart.js"></script>
     <script>
         paypal.minicart.render();
-
         paypal.minicart.cart.on('checkout', function (evt) {
             var items = this.items(),
                 len = items.length,
                 total = 0,
                 i;
-
             // Count the number of each item in the cart
             for (i = 0; i < len; i++) {
                 total += items[i].get('quantity');
             }
-
             if (total < 3) {
                 alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
                 evt.preventDefault();
             }
         });
-
     </script>
-{% endblock %}
+    {% endblock %}
