@@ -33,6 +33,11 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $phone;
 
     /**
@@ -50,21 +55,34 @@ class Order
      */
     private $products;
 
+    /**
+     * Order constructor.
+     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getStatus(): ?int
     {
         return $this->status;
     }
 
+    /**
+     * @param int $status
+     * @return $this
+     */
     public function setStatus(int $status): self
     {
         $this->status = $status;
@@ -72,11 +90,18 @@ class Order
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     * @return $this
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -84,11 +109,18 @@ class Order
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
+    /**
+     * @param string $phone
+     * @return $this
+     */
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
@@ -96,11 +128,18 @@ class Order
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param string $city
+     * @return $this
+     */
     public function setCity(string $city): self
     {
         $this->city = $city;
@@ -108,11 +147,18 @@ class Order
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAddress(): ?string
     {
         return $this->address;
     }
 
+    /**
+     * @param string $address
+     * @return $this
+     */
     public function setAddress(string $address): self
     {
         $this->address = $address;
@@ -128,6 +174,10 @@ class Order
         return $this->products;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -137,12 +187,33 @@ class Order
         return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
         }
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): self
+    {
+        $this->email = $email;
         return $this;
     }
 }

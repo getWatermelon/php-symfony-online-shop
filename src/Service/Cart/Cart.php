@@ -75,4 +75,11 @@ class Cart implements \Countable
         }
         return $cost;
     }
+
+    public function clear()
+    {
+        if ($this->session->has('order')) {
+            $this->session->remove('order');
+        }
+    }
 }

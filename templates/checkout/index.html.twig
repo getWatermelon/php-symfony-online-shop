@@ -5,79 +5,8 @@
 {% block body %}
 
     <!-- header -->
-    <div class="agileits_header">
-        <div class="w3l_offers">
-            <a href="products.html">Today's special Offers !</a>
-        </div>
-        <div class="w3l_search">
-            <form action="#" method="post">
-                <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-                <input type="submit" value=" ">
-            </form>
-        </div>
-        <div class="product_list_header">
-            <form action="#" method="post" class="last">
-                <fieldset>
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="View your cart" class="button" />
-                </fieldset>
-            </form>
-        </div>
-        <div class="w3l_header_right">
-            <ul>
-                <li class="dropdown profile_details_drop">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-                    <div class="mega-dropdown-menu">
-                        <div class="w3ls_vegetables">
-                            <ul class="dropdown-menu drp-mnu">
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="login.html">Sign Up</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="w3l_header_right1">
-            <h2><a href="mail.html">Contact Us</a></h2>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
+    {{ include('parts/header.html.twig') }}
 
-    <div class="logo_products">
-        <div class="container">
-            <div class="w3ls_logo_products_left">
-                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="special_items">
-                    <li><a href="events.html">Events</a><i>/</i></li>
-                    <li><a href="about.html">About Us</a><i>/</i></li>
-                    <li><a href="products.html">Best Deals</a><i>/</i></li>
-                    <li><a href="services.html">Services</a></li>
-                </ul>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="phone_email">
-                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-    <!-- //header -->
-    <!-- products-breadcrumb -->
-    <div class="products-breadcrumb">
-        <div class="container">
-            <ul>
-                <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
-                <li>Checkout</li>
-            </ul>
-        </div>
-    </div>
-    <!-- //products-breadcrumb -->
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -99,7 +28,11 @@
             <!-- about -->
             <div class="privacy about">
                 <h3>Товары к оплате</h3>
-
+                {% if app.request.get('status', 0) %}
+                    <div class="alert alert-success" role="alert">
+                        Ваш Заказ успешно принят
+                    </div>
+                {% endif %}
                 <div class="checkout-right">
                     <h4>В вашей корзине: <span>{{ cart.count }} элементов</span></h4>
                     <table class="timetable_sub">
@@ -118,7 +51,7 @@
                         {% for item in cart.getItems %}
                             <tr class="rem1">
                                 <td class="invert">1</td>
-                                <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
+                                <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
                                 <td class="invert">
                                     <div class="quantity">
                                         <div class="quantity-select">
@@ -148,44 +81,48 @@
                             <li>Сумма <i>-</i> <span>{{ cart.getTotal }} грн</span></li>
                         </ul>
                     </div>
-                    <div class="col-md-8 address_form_agile">
-                        <h4>Детали заказа</h4>
-                        <form action="{{ path('checkout') }}" method="post" class="creditly-card-form agileinfo_form">
+                    {% if cart.empty %}
+                        <div class="col-md-8 address_form_agile">Ваша корзина пуста</div>
+                    {% else %}
+                        <div class="col-md-8 address_form_agile">
+                            <h4>Детали заказа</h4>
+                            {{ form_start(form, {'attr': {'class': 'creditly-card-form agileinfo_form'}}) }}
                             <section class="creditly-wrapper wthree, w3_agileits_wrapper">
                                 <div class="information-wrapper">
                                     <div class="first-row form-group">
                                         <div class="controls">
                                             <label class="control-label">Имя: </label>
-                                            <input class="billing-address-name form-control" type="text" name="name" placeholder="Имя">
+                                            {{ form_widget(form.username, {'attr': {'class': 'billing-address-name form-control', 'placeholder': 'Ваше имя'}}) }}
                                         </div>
                                         <div class="w3_agileits_card_number_grids">
                                             <div class="w3_agileits_card_number_grid_left">
                                                 <div class="controls">
                                                     <label class="control-label">Номер:</label>
-                                                    <input class="form-control" type="text" placeholder="Mobile number">
+                                                    {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Телефон'}}) }}
                                                 </div>
                                             </div>
                                             <div class="clear"> </div>
                                         </div>
                                         <div class="controls">
                                             <label class="control-label">Город </label>
-                                            <input class="form-control" type="text" placeholder="Город">
+                                            {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': 'Город'}}) }}
                                         </div>
                                         <div class="controls">
-                                            <label class="control-label">Место доставки: </label>
-                                            <select class="form-control option-w3ls">
-                                                <option>Офис</option>
-                                                <option>Квартира</option>
-                                                <option>Другое</option>
-
-                                            </select>
+                                            <label class="control-label">Email </label>
+                                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
                                         </div>
+                                        <div class="controls">
+                                            <label class="control-label">Адрес </label>
+                                            {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Адрес'}}) }}
+                                        </div>
+                                        {{ form_row(form._token) }}
                                     </div>
                                     <button class="submit check_out">Оплатить</button>
                                 </div>
                             </section>
-                        </form>
-                    </div>
+                            {{ form_end(form) }}
+                        </div>
+                    {% endif %}
 
                     <div class="clearfix"> </div>
 
@@ -206,6 +143,7 @@
             var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
             divUpd.text(newVal);
         });
+
         $('.value-minus').on('click', function(){
             var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
             if(newVal>=1) divUpd.text(newVal);
@@ -238,20 +176,6 @@
     </script>
 
     <!-- //js -->
-    <!-- script-for sticky-nav -->
-    <script>
-        $(document).ready(function() {
-            var navoffeset=$(".agileits_header").offset().top;
-            $(window).scroll(function(){
-                var scrollpos=$(window).scrollTop();
-                if(scrollpos >=navoffeset){
-                    $(".agileits_header").addClass("fixed");
-                }else{
-                    $(".agileits_header").removeClass("fixed");
-                }
-            });
-        });
-    </script>
     <!-- //script-for sticky-nav -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
@@ -292,26 +216,33 @@
                 easingType: 'linear'
                 };
             */
+
             $().UItoTop({ easingType: 'easeOutQuart' });
+
         });
     </script>
     <!-- //here ends scrolling icon -->
     <script src="{{ asset('js/minicart.js') }}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
     <script>
         paypal.minicart.render();
+
         paypal.minicart.cart.on('checkout', function (evt) {
             var items = this.items(),
                 len = items.length,
                 total = 0,
                 i;
+
             // Count the number of each item in the cart
             for (i = 0; i < len; i++) {
                 total += items[i].get('quantity');
             }
+
             if (total < 3) {
                 alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
                 evt.preventDefault();
             }
         });
+
     </script>
 {% endblock %}
