@@ -1,9 +1,10 @@
 $(function() {
-    $('#add_to_cart').on(
+    $('.add_to_cart').on(
         'click',
         function(event) {
+            let productId = $(this).data('productid');
             event.preventDefault();
-            $.post(`/product/${PRODUCT_ID}/add_to_cart`, {token : TOKEN})
+            $.post(`/product/${productId}/add_to_cart`)
         }
     );
 

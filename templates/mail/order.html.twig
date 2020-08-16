@@ -100,7 +100,7 @@ Licensed under MIT
                                                         {% for item in cart.getItems %}
                                                 <tr class="rem1">
                                                     <td class="invert">1</td>
-                                                    <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
+                                                    <td class="invert-image"><a href="{{ app_domain ~ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset(  'uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
                                                     <td class="invert">
                                                         <div class="quantity">
                                                             <div class="quantity-select">

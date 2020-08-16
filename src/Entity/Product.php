@@ -54,9 +54,10 @@ class Product
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="products")
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="product")
      */
-    private $orders;
+    private $orderProducts;
+
 
 
     public function __construct()
@@ -64,7 +65,7 @@ class Product
         $this->price = new ArrayCollection();
         $this->rating = new ArrayCollection();
         $this->categories = new ArrayCollection();
-//        $this->orders = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -226,16 +227,16 @@ class Product
     /**
      * @return Collection|Order[]
      */
-    public function getOrders(): Collection
+    public function getOrderProducts(): Collection
     {
-        return $this->orders;
+        return $this->orderProducts;
     }
 
-    public function addOrder(Order $order): self
+    public function addOrder(OrderProduct $orderProduct): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->addProduct($this);
+        if (!$this->orderProducts->contains($orderProduct)) {
+            $this->orderProducts[] = $orderProduct;
+            $orderProduct->addProduct($orderProduct);
         }
 
         return $this;
@@ -243,12 +244,13 @@ class Product
 
     public function removeOrder(Order $order): self
     {
-        if ($this->orders->contains($order)) {
-            $this->orders->removeElement($order);
+        if ($this->orderProducts->contains($order)) {
+            $this->orderProducts->removeElement($order);
             $order->removeProduct($this);
         }
 
         return $this;
     }
+
 
 }

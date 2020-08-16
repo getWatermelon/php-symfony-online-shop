@@ -1,10 +1,10 @@
 {% block body %}
 <h1>
-    {% if app.session.get('order') is not empty %}
-        <h1>{{ dump(app.session.get('order')) }}</h1>
-    {% else %}
-        <h1>Session is empty</h1>
-    {% endif %}
+{#    {% if app.session.get('order') is not empty %}#}
+{#        <h1>{{ dump(app.session.get('order')) }}</h1>#}
+{#    {% else %}#}
+{#        <h1>Session is empty</h1>#}
+{#    {% endif %}#}
 </h1>
 <div class="agileits_header">
     <div class="w3l_offers">
@@ -61,37 +61,41 @@
     });
 </script>
 <!-- //script-for sticky-nav -->
-<div class="logo_products">
-    <div class="container">
-        <div class="w3ls_logo_products_left">
-            <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
-        </div>
-        <div class="w3ls_logo_products_left1">
-            <ul class="special_items">
-                <li><a href="events.html">Events</a><i>/</i></li>
-                <li><a href="about.html">About Us</a><i>/</i></li>
-                <li><a href="products.html">Best Deals</a><i>/</i></li>
-                <li><a href="services.html">Services</a></li>
-            </ul>
-        </div>
-        <div class="w3ls_logo_products_left1">
-            <ul class="phone_email">
-                <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-                <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
-            </ul>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-</div>
-<!-- //header -->
-<!-- products-breadcrumb -->
-<div class="products-breadcrumb">
-    <div class="container">
-        <ul>
-            <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
-            <li>Single Page</li>
-        </ul>
-    </div>
-</div>
-<!-- //products-breadcrumb -->
+{#<div class="logo_products">#}
+{#    <div class="container">#}
+{#        <div class="w3ls_logo_products_left">#}
+{#            <h1><a href="index.html"><span>Grocery</span> Store</a></h1>#}
+{#        </div>#}
+{#        <div class="w3ls_logo_products_left1">#}
+{#            <ul class="special_items">#}
+{#                <li><a href="events.html">Events</a><i>/</i></li>#}
+{#                <li><a href="about.html">About Us</a><i>/</i></li>#}
+{#                <li><a href="products.html">Best Deals</a><i>/</i></li>#}
+{#                <li><a href="services.html">Services</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#        <div class="w3ls_logo_products_left1">#}
+{#            <ul class="phone_email">#}
+{#                <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>#}
+{#                <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#        <div class="clearfix"> </div>#}
+{#    </div>#}
+{#</div>#}
+{#<!-- //header -->#}
+{#<!-- products-breadcrumb -->#}
+{#<div class="products-breadcrumb">#}
+{#    <div class="container">#}
+{#        <ul>#}
+{#            <li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a><span>|</span></li>#}
+{#            {% if category%}#}
+{#                <li>{{ category.title }}</li>#}
+{#            {% elseif product%}#}
+{#                <li>{{ product.title }}</li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+{#</div>#}
+{#<!-- //products-breadcrumb -->#}
 {% endblock %}
