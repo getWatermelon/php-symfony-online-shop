@@ -31,3 +31,8 @@ checkout:
     path: /checkout
     methods:    [GET, POST]
     controller: App\Controller\CheckoutController::index
+
+page_contact_us:
+    path: /contact_us
+    methods:    [GET, POST]
+    controller: App\Controller\PageController::contactUs
