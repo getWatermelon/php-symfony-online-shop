@@ -22,6 +22,16 @@ product_add_to_cart:
     methods:    POST
     controller: App\Controller\ProductController::addToCart
 
+product_remove_from_cart:
+    path: /product/{id}/remove_from_cart
+    methods:    POST
+    controller: App\Controller\ProductController::removeFromCart
+
+product_update_count:
+    path: /product/{id}/update_count
+    methods:    POST
+    controller: App\Controller\ProductController::updateItemCount
+
 product_show_cart:
     path: /product/show_cart
     methods:    POST

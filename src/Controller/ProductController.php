@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Entity\Rating;
 use App\Service\Cart\Cart;
+use App\Service\Cart\Item;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
@@ -72,5 +73,24 @@ class ProductController extends AbstractController
         return $this->render('parts/cart_modal.html.twig', [
             'cart' => $cart
         ]);
+    }
+
+
+    public function removeFromCart(Product $product, Cart $cart)
+    {
+        $cart->removeItemByProduct($product);
+        return new Response($cart->getTotal());
+    }
+
+    public function updateItemCount(Product $product, Cart $cart, Request $request)
+    {
+        $count = $request->request->get('count');
+        $item = new Item($product, $count);
+        $cart->updateItem($item);
+        $result = [
+            'item-price' => $item->getCost(),
+            'total' => $cart->getTotal()
+        ];
+        return new Response(json_encode($result));
     }
 }

@@ -7,6 +7,39 @@
     <!-- header -->
     {{ include('parts/header.html.twig') }}
 
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                    <li><a href="events.html">Events</a><i>/</i></li>
+                    <li><a href="about.html">About Us</a><i>/</i></li>
+                    <li><a href="products.html">Best Deals</a><i>/</i></li>
+                    <li><a href="services.html">Services</a></li>
+                </ul>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="phone_email">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+                <li>Checkout</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //products-breadcrumb -->
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -42,31 +75,32 @@
                             <th>Продукт</th>
                             <th>Количество</th>
                             <th>Название</th>
-
                             <th>Цена</th>
+                            <th>Общая стоимость</th>
                             <th>Удалить</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in cart.getItems %}
-                            <tr class="rem1">
+                            <tr class="rem1" data-productid="{{ item.product.id }}">
                                 <td class="invert">1</td>
-                                <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
+                                <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
                                 <td class="invert">
                                     <div class="quantity">
                                         <div class="quantity-select">
                                             <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value"><span>{{ item.count }}</span></div>
+                                            <div class="entry value item-count"><span>{{ item.count }}</span></div>
                                             <div class="entry value-plus active">&nbsp;</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="invert">{{ item.getTitle }}</td>
 
-                                <td class="invert">{{ item.getCost }} грн</td>
+                                <td class="invert">{{ item.product.getCurrentPrice }} грн</td>
+                                <td class="invert"><span class="item-total">{{ item.getCost }}</span> грн</td>
                                 <td class="invert">
                                     <div class="rem">
-                                        <div class="close1"> </div>
+                                        <div class="close1" > </div>
                                     </div>
 
                                 </td>
@@ -76,9 +110,9 @@
                 </div>
                 <div class="checkout-left">
                     <div class="col-md-4 checkout-left-basket">
-                        <h4>Continue to basket</h4>
+                        <h4><a href="{{ path('index') }}">Вернуться в магазин</a></h4>
                         <ul>
-                            <li>Сумма <i>-</i> <span>{{ cart.getTotal }} грн</span></li>
+                            <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> грн</span></li>
                         </ul>
                     </div>
                     {% if cart.empty %}
@@ -147,31 +181,6 @@
         $('.value-minus').on('click', function(){
             var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
             if(newVal>=1) divUpd.text(newVal);
-        });
-    </script>
-    <!--quantity-->
-    <script>$(document).ready(function(c) {
-            $('.close1').on('click', function(c){
-                $('.rem1').fadeOut('slow', function(c){
-                    $('.rem1').remove();
-                });
-            });
-        });
-    </script>
-    <script>$(document).ready(function(c) {
-            $('.close2').on('click', function(c){
-                $('.rem2').fadeOut('slow', function(c){
-                    $('.rem2').remove();
-                });
-            });
-        });
-    </script>
-    <script>$(document).ready(function(c) {
-            $('.close3').on('click', function(c){
-                $('.rem3').fadeOut('slow', function(c){
-                    $('.rem3').remove();
-                });
-            });
         });
     </script>
 
