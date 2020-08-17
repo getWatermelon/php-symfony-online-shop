@@ -174,16 +174,16 @@ class Order
     /**
      * @return Collection|Product[]
      */
-    public function getProducts(): Collection
+    public function getOrderProducts(): Collection
     {
-        return $this->products;
+        return $this->orderProducts;
     }
 
     /**
      * @param Product $product
      * @return $this
      */
-    public function addProduct(Product $product): self
+    public function addOrderProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;

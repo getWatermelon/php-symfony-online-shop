@@ -25,6 +25,9 @@
             </fieldset>
         </form>
     </div>
+    {% if is_granted('ROLE_USER') %}
+        <span><a style="color: #1adeed">{{ app.user.username }}</a></span>
+    {% endif %}
     <div class="w3l_header_right">
         <ul>
             <li class="dropdown profile_details_drop">
@@ -36,7 +39,7 @@
                                 <li><a href="{{ path('app_login') }}">Войти</a></li>
                                 <li><a href="{{ path('app_register') }}">Зарегистрироваться</a></li>
                             {% else %}
-                                <li><a href="#">Мои Заказы</a></li>
+                                <li><a href="{{ path('app_order_history') }}">Мои Заказы</a></li>
                                 <li><a href="{{ path('app_logout') }}">Выйти</a></li>
                             {% endif %}
                         </ul>

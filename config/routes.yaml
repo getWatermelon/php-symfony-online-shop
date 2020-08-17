@@ -62,3 +62,7 @@ app_register:
 app_verify_email:
     path: /verify/email
     controller: App\Controller\RegistrationController::verifyUserEmail
+
+app_order_history:
+    path: /order/history
+    controller: App\Controller\CheckoutController::getOrdersHistory

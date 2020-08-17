@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderProduct;
 use App\Form\OrderType;
+use App\Repository\OrderRepository;
 use App\Service\Cart\Cart;
 use App\Service\Cart\Item;
 use App\Service\Mailer\OrderMailer;
@@ -14,9 +15,21 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CheckoutController
+ * @package App\Controller
+ */
 class CheckoutController extends AbstractController
 {
 
+    /**
+     * @param Cart $cart
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param OrderMailer $mailer
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     public function index(Cart $cart, Request $request, EntityManagerInterface $em, OrderMailer $mailer)
     {
         $order = new Order();
@@ -50,6 +63,18 @@ class CheckoutController extends AbstractController
         return $this->render('checkout/index.html.twig', [
             'cart' => $cart,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param OrderRepository $repository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getOrdersHistory(OrderRepository $repository)
+    {
+        $orders = $repository->findBy(['user' => $this->getUser()]);
+        return $this->render('checkout/history.html.twig', [
+            'orders' => $orders
         ]);
     }
 
