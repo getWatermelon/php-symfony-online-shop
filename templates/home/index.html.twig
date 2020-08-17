@@ -295,15 +295,15 @@
         <div class="container">
             <h3>Top Products</h3>
             <div class="w3l_fresh_vegetables_grids">
-{#                <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">#}
-{#                    <div class="w3l_fresh_vegetables_grid2">#}
-{#                        <ul>#}
-{#                            {% for cat in navigation.allCategories %}#}
-{#                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="{{ path('category_index',{'id': cat.id}) }}">{{ cat.title }}</a></li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                    </div>#}
-{#                </div>#}
+                <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
+                    <div class="w3l_fresh_vegetables_grid2">
+                        <ul>
+                            {% for cat in navigation.allCategories %}
+                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="{{ path('category_index',{'id': cat.id}) }}">{{ cat.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
                 <div class="col-md-9 w3l_fresh_vegetables_grid_right">
                     <div class="col-md-4 w3l_fresh_vegetables_grid">
                         <div class="w3l_fresh_vegetables_grid1">

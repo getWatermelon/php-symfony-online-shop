@@ -32,8 +32,13 @@
                 <div class="mega-dropdown-menu">
                     <div class="w3ls_vegetables">
                         <ul class="dropdown-menu drp-mnu">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="login.html">Sign Up</a></li>
+                            {% if not is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('app_login') }}">Войти</a></li>
+                                <li><a href="{{ path('app_register') }}">Зарегистрироваться</a></li>
+                            {% else %}
+                                <li><a href="#">Мои Заказы</a></li>
+                                <li><a href="{{ path('app_logout') }}">Выйти</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>

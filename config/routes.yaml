@@ -46,3 +46,19 @@ page_contact_us:
     path: /contact_us
     methods:    [GET, POST]
     controller: App\Controller\PageController::contactUs
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+app_verify_email:
+    path: /verify/email
+    controller: App\Controller\RegistrationController::verifyUserEmail
