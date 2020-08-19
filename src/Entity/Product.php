@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,6 +59,11 @@ class Product
      */
     private $orderProducts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="product")
+     */
+    private $comments;
+
 
 
     public function __construct()
@@ -66,6 +72,7 @@ class Product
         $this->rating = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->orderProducts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +257,43 @@ class Product
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getProduct() === $this) {
+                $comment->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+    public function getTopComments(): Collection
+    {
+        $criteria = Criteria::create()->where(new Comparison('replyTo', Comparison::IS, null));
+
+        return $this->comments->matching($criteria);
     }
 
 

@@ -66,3 +66,8 @@ app_verify_email:
 app_order_history:
     path: /order/history
     controller: App\Controller\CheckoutController::getOrdersHistory
+
+comment_new:
+    path: /new/{id}
+    methods:    [POST]
+    controller: App\Controller\CommentController::newComment

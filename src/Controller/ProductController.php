@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Product;
 use App\Entity\Rating;
+use App\Form\CommentType;
 use App\Service\Cart\Cart;
 use App\Service\Cart\Item;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +29,9 @@ class ProductController extends AbstractController
      */
     public function index(Product $product)
     {
+        $form = $this->createForm(CommentType::class, new Comment());
         return $this->render('product/index.html.twig', [
+            'form'     => $form->createView(),
             'product' => $product,
         ]);
     }
