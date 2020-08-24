@@ -9,16 +9,19 @@ use App\Service\Upload\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 /**
- * @Route("/admin/product")
+ * Class ProductController
+ * @package App\Controller\Admin
  */
 class ProductController extends AbstractController
 {
+
     /**
-     * @Route("/", name="product_index", methods={"GET"})
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -28,7 +31,8 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -51,7 +55,8 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_product_show", methods={"GET"})
+     * @param Product $product
+     * @return Response
      */
     public function show(Product $product): Response
     {
@@ -61,7 +66,10 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Product $product
+     * @param SluggerInterface $slugger
+     * @return Response
      */
     public function edit(Request $request, Product $product, SluggerInterface $slugger): Response
     {
@@ -96,7 +104,9 @@ class ProductController extends AbstractController
         }
 
     /**
-     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Product $product
+     * @return Response
      */
     public function delete(Request $request, Product $product): Response
     {

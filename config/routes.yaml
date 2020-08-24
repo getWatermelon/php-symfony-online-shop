@@ -71,3 +71,29 @@ comment_new:
     path: /new/{id}
     methods:    [POST]
     controller: App\Controller\CommentController::newComment
+
+product_index:
+    path: /admin/product/
+    methods:    [GET]
+    controller: App\Controller\Admin\ProductController::index
+
+product_new:
+    path: /admin/product/new
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\ProductController::new
+
+admin_product_show:
+    path: /admin/product/{id}
+    methods:    [GET]
+    controller: App\Controller\Admin\ProductController::show
+
+product_edit:
+    path: /admin/product/{id}/edit
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\ProductController::edit
+
+product_delete:
+    path: /admin/product/{id}
+    methods:    [DELETE]
+    controller: App\Controller\Admin\ProductController::delete
+

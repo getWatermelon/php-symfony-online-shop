@@ -41,7 +41,7 @@ class Product
     private $mainImage;
 
     /**
-     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="product", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $price;
 
@@ -70,11 +70,15 @@ class Product
      */
     private $images = [];
 
-//    /**
-//     * @ORM\OneToOne(targetEntity=ProductImages::class)
-//     */
-//    private $images;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isOnSale;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isTop;
 
 
     public function __construct()
@@ -128,24 +132,12 @@ class Product
         return $this;
     }
 
-//    /**
-//     * @return Collection|Price[]
-//     */
+
     public function getPrice()
     {
-
-        $criteria = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('product', $this));
-//
-//        /** @var Price $currPrice */
-//        $allPrices = $this->price->matching($criteria);
-
-//        $allPrices = [];
-        $allPrices =  $this->price->matching($criteria);
-//                $allPrices = $price->getValue();
-//        }
-        return $allPrices->getValues();
+        return $this->price;
     }
+
 
     public function addPrice(Price $price): self
     {
@@ -229,35 +221,21 @@ class Product
         return $this;
     }
 
-//    public function getMyPrice() : array
-//    {
-
-//        $criteria = Criteria::create()
-//            ->andWhere(Criteria::expr()->eq('isCurrent', true));
-//
-//        /** @var Price $currPrice */
-//        $currPrice = $this->price->matching($criteria);
-//        return $currPrice->getValue();
-
-//        $criteria = Criteria::create()
-//            ->andWhere(Criteria::expr()->eq('isCurrent', true));
-//
-//        $prices = [];
-////        /** @var Price $myPrices */
-//        foreach ($this->price->matching($criteria) as $price){
-//            $prices = $price;
-//        }
-////        $myPrices = $this->price->matching($criteria)->current();
-//        return $prices;
-//
-////        return $priceRepository->findAll();
-
-//    }
 
     public function getCurrentPrice() : float
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('isCurrent', true));
+
+        /** @var Price $currPrice */
+        $currPrice = $this->price->matching($criteria)->current();
+        return $currPrice->getValue();
+    }
+
+    public function getCurrentSalePrice() : float
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('isSale', true));
 
         /** @var Price $currPrice */
         $currPrice = $this->price->matching($criteria)->current();
@@ -297,6 +275,7 @@ class Product
         return $this;
     }
 
+
     public function removeOrder(Order $order): self
     {
         if ($this->orderProducts->contains($order)) {
@@ -325,6 +304,7 @@ class Product
         return $this;
     }
 
+
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -337,6 +317,8 @@ class Product
 
         return $this;
     }
+
+
     public function getTopComments(): Collection
     {
         $criteria = Criteria::create()->where(new Comparison('replyTo', Comparison::IS, null));
@@ -344,60 +326,42 @@ class Product
         return $this->comments->matching($criteria);
     }
 
-//    /**
-//     * @return Collection|ProductImages[]
-//     */
-//    public function getImages(): Collection
-//    {
-//        return $this->images;
-//    }
-//
-//    public function addImage(ProductImages $image): self
-//    {
-//        if (!$this->images->contains($image)) {
-//            $this->images[] = $image;
-//            $image->setProduct($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeImage(ProductImages $image): self
-//    {
-//        if ($this->images->contains($image)) {
-//            $this->images->removeElement($image);
-//            // set the owning side to null (unless already changed)
-//            if ($image->getProduct() === $this) {
-//                $image->setProduct(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
 
-//public function getImages(): ?ProductImages
-//{
-//    return $this->images;
-//}
-//
-//public function setImages(?ProductImages $images): self
-//{
-//    $this->images = $images;
-//
-//    return $this;
-//}
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
 
-public function getImages(): ?array
-{
-    return $this->images;
-}
+    public function setImages(?array $images): self
+    {
+       $this->images = $images;
 
-public function setImages(?array $images): self
-{
-    $this->images = $images;
+       return $this;
+    }
 
-    return $this;
-}
+    public function getIsOnSale(): ?bool
+    {
+        return $this->isOnSale;
+    }
+
+    public function setIsOnSale(bool $isOnSale): self
+    {
+        $this->isOnSale = $isOnSale;
+
+        return $this;
+    }
+
+    public function getIsTop(): ?bool
+    {
+        return $this->isTop;
+    }
+
+    public function setIsTop(bool $isTop): self
+    {
+        $this->isTop = $isTop;
+
+        return $this;
+    }
 
 
 }

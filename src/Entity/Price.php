@@ -29,13 +29,25 @@ class Price
     private $product;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $isCurrent;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": "0"})
+     */
+    private $isSale;
 
     public function __toString()
     {
         return $this->value;
+    }
+
+    public function __constract()
+    {
+        $this->isCurrent = false;
+        $this->isSale = false;
+
     }
 
     public function getId(): ?int
@@ -75,6 +87,18 @@ class Price
     public function setIsCurrent(?bool $isCurrent): self
     {
         $this->isCurrent = $isCurrent;
+
+        return $this;
+    }
+
+    public function getIsSale(): ?bool
+    {
+        return $this->isSale;
+    }
+
+    public function setIsSale(bool $isSale): self
+    {
+        $this->isSale = $isSale;
 
         return $this;
     }
