@@ -33,6 +33,11 @@ class Price
      */
     private $isCurrent;
 
+    public function __toString()
+    {
+        return $this->value;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

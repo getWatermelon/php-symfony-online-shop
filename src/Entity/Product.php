@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\PriceRepository;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,7 +38,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private $mainImage;
 
     /**
      * @ORM\OneToMany(targetEntity=Price::class, mappedBy="product", orphanRemoval=true)
@@ -64,6 +65,16 @@ class Product
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $images = [];
+
+//    /**
+//     * @ORM\OneToOne(targetEntity=ProductImages::class)
+//     */
+//    private $images;
+
 
 
     public function __construct()
@@ -73,6 +84,7 @@ class Product
         $this->categories = new ArrayCollection();
         $this->orderProducts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->mainImage = 'standart_product_image.jpg';
     }
 
     public function getId(): ?int
@@ -104,24 +116,35 @@ class Product
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getMainImage(): ?string
     {
-        return $this->image;
+        return $this->mainImage;
     }
 
-    public function setImage(?string $image): self
+    public function setMainImage(?string $mainImage): self
     {
-        $this->image = $image;
+        $this->mainImage = $mainImage;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Price[]
-     */
-    public function getPrice(): Collection
+//    /**
+//     * @return Collection|Price[]
+//     */
+    public function getPrice()
     {
-        return $this->price;
+
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('product', $this));
+//
+//        /** @var Price $currPrice */
+//        $allPrices = $this->price->matching($criteria);
+
+//        $allPrices = [];
+        $allPrices =  $this->price->matching($criteria);
+//                $allPrices = $price->getValue();
+//        }
+        return $allPrices->getValues();
     }
 
     public function addPrice(Price $price): self
@@ -205,6 +228,31 @@ class Product
 
         return $this;
     }
+
+//    public function getMyPrice() : array
+//    {
+
+//        $criteria = Criteria::create()
+//            ->andWhere(Criteria::expr()->eq('isCurrent', true));
+//
+//        /** @var Price $currPrice */
+//        $currPrice = $this->price->matching($criteria);
+//        return $currPrice->getValue();
+
+//        $criteria = Criteria::create()
+//            ->andWhere(Criteria::expr()->eq('isCurrent', true));
+//
+//        $prices = [];
+////        /** @var Price $myPrices */
+//        foreach ($this->price->matching($criteria) as $price){
+//            $prices = $price;
+//        }
+////        $myPrices = $this->price->matching($criteria)->current();
+//        return $prices;
+//
+////        return $priceRepository->findAll();
+
+//    }
 
     public function getCurrentPrice() : float
     {
@@ -295,6 +343,61 @@ class Product
 
         return $this->comments->matching($criteria);
     }
+
+//    /**
+//     * @return Collection|ProductImages[]
+//     */
+//    public function getImages(): Collection
+//    {
+//        return $this->images;
+//    }
+//
+//    public function addImage(ProductImages $image): self
+//    {
+//        if (!$this->images->contains($image)) {
+//            $this->images[] = $image;
+//            $image->setProduct($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeImage(ProductImages $image): self
+//    {
+//        if ($this->images->contains($image)) {
+//            $this->images->removeElement($image);
+//            // set the owning side to null (unless already changed)
+//            if ($image->getProduct() === $this) {
+//                $image->setProduct(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+
+//public function getImages(): ?ProductImages
+//{
+//    return $this->images;
+//}
+//
+//public function setImages(?ProductImages $images): self
+//{
+//    $this->images = $images;
+//
+//    return $this;
+//}
+
+public function getImages(): ?array
+{
+    return $this->images;
+}
+
+public function setImages(?array $images): self
+{
+    $this->images = $images;
+
+    return $this;
+}
 
 
 }

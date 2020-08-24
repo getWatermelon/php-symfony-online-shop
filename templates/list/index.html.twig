@@ -96,7 +96,7 @@
                                         <figure>
                                             <div class="snipcart-item block">
                                                 <div class="snipcart-thumb">
-                                                    <a href="{{ path('product_show', {'id': product.id}) }}"><img src="{{ asset('uploads/product_images/' ~ product.image) }}" alt=" " class="img-responsive" /></a>
+                                                    <a href="{{ path('product_show', {'id': product.id}) }}"><img src="{{ asset('uploads/product_images/' ~ product.mainImage) }}" alt=" " class="img-responsive" /></a>
                                                     <p>{{ product.title }}</p>
                                                     <h4>{{ product.getCurrentPrice }} грн</h4>
                                                 </div>

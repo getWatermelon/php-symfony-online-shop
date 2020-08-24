@@ -13,10 +13,10 @@
             </div>
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
-                    <li><a href="events.html">Events</a><i>/</i></li>
-                    <li><a href="about.html">About Us</a><i>/</i></li>
-                    <li><a href="products.html">Best Deals</a><i>/</i></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="#">Events</a><i>/</i></li>
+                    <li><a href="#">About Us</a><i>/</i></li>
+                    <li><a href="#">Best Deals</a><i>/</i></li>
+                    <li><a href="#">Services</a></li>
                 </ul>
             </div>
             <div class="w3ls_logo_products_left1">
@@ -65,8 +65,13 @@
             <div class="agileinfo_single">
                 <h5>{{ product.title }}</h5>
                 <div class="col-md-4 agileinfo_single_left">
-                    <img id="example" src="{{ asset('uploads/product_images/' ~ product.image) }}" alt=" " class="img-responsive" />
+                    <img id="example" src="{{ asset('uploads/product_images/' ~ product.mainImage) }}" alt=" " class="img-responsive" />
                 </div>
+                {% for image in product.images %}
+                    <div class="col-md-4 agileinfo_single_left">
+                        <img id="example" src="{{ asset('uploads/product_images/' ~ image) }}" alt=" " class="img-responsive" />
+                    </div>
+                {% endfor %}
                 <div class="col-md-8 agileinfo_single_right">
                     <div class="rating1">
 						<span class="starRating">
