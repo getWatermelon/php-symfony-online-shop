@@ -77,7 +77,7 @@
                             {% for orderProduct in order.orderProducts %}
                                 <tr class="rem1" data-productid="{{ orderProduct.product.id }}">
                                     <td class="invert">{{ order.id }}</td>
-                                    <td class="invert-image"><a href="{{ path('product_show', {'id': orderProduct.product.id}) }}"><img src="{{ asset( 'uploads/product_images/' ~ orderProduct.product.image) }}" alt=" " class="img-responsive"></a></td>
+                                    <td class="invert-image"><a href="{{ path('product_show', {'id': orderProduct.product.id}) }}"><img src="{{ asset( 'uploads/product_images/' ~ orderProduct.product.mainImage) }}" alt=" " class="img-responsive"></a></td>
                                     <td class="invert">
                                         <div class="quantity">
                                             <div class="quantity-select">

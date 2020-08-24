@@ -27,8 +27,19 @@ class ProductController extends AbstractController
      * @param Product $product
      * @return Response
      */
-    public function index(Product $product)
+    public function index(Product $product, SessionInterface $session)
     {
+        $session->start();
+        $products = $session->has('order') ? $session->get('order') : [];
+        if (empty($products[$product->getId()])) {
+            $products[$product->getId()] = 0;
+        }
+
+        $products[$product->getId()]++;
+
+        $session->set('order', $products);
+        return new Response();
+
         $form = $this->createForm(CommentType::class, new Comment());
         return $this->render('product/index.html.twig', [
             'form'     => $form->createView(),

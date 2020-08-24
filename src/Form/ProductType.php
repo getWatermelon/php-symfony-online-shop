@@ -30,7 +30,7 @@ class ProductType extends AbstractType
             $form = $event->getForm();
 
             $form->add('currentPrice', NumberType::class, ['data' => $product->getCurrentPrice(), 'mapped' => false]);
-            $form->add('salePrice', NumberType::class, ['data' => $product->getCurrentSalePrice(), 'mapped' => false]);
+            $form->add('salePrice', NumberType::class, ['data' => ($product->getCurrentSalePrice() ?? 0.00), 'required' => false, 'mapped' => false]);
 
         });
 
@@ -44,16 +44,19 @@ class ProductType extends AbstractType
                 $pr->setIsSale(false);
             }
 
+
             $currentPrice = new Price();
             $currentPrice->setValue($form->get('currentPrice')->getData());
             $currentPrice->setIsCurrent(true);
             $currentPrice->setIsSale(false);
+            $currentPrice->setCreatedAt(new \DateTime());
             $product->addPrice($currentPrice);
 
             $salePrice = new Price();
             $salePrice->setValue($form->get('salePrice')->getData());
-            $salePrice->setIsSale(true);
             $salePrice->setIsCurrent(false);
+            $salePrice->setIsSale(true);
+            $salePrice->setCreatedAt(new \DateTime());
             $product->addPrice($salePrice);
         });
 

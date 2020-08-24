@@ -38,6 +38,11 @@ class Price
      */
     private $isSale;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $createdAt;
+
     public function __toString()
     {
         return $this->value;
@@ -45,9 +50,7 @@ class Price
 
     public function __constract()
     {
-        $this->isCurrent = false;
-        $this->isSale = false;
-
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -99,6 +102,18 @@ class Price
     public function setIsSale(bool $isSale): self
     {
         $this->isSale = $isSale;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

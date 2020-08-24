@@ -71,7 +71,7 @@ class Product
     private $images = [];
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isOnSale;
 
@@ -89,6 +89,11 @@ class Product
         $this->orderProducts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->mainImage = 'standart_product_image.jpg';
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -232,7 +237,7 @@ class Product
         return $currPrice->getValue();
     }
 
-    public function getCurrentSalePrice() : float
+    public function getCurrentSalePrice() : ?float
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('isSale', true));

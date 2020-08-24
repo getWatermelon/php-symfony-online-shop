@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     product_images_directory: '%kernel.project_dir%/public/uploads/product_images'
+    category_images_directory: '%kernel.project_dir%/public/uploads/category_images'
+    user_images_directory: '%kernel.project_dir%/public/uploads/user_images'
+
     app.domain: '%env(PROJECT_DOMAIN)%'
 services:
     # default configuration for services in *this* file

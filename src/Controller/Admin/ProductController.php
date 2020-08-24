@@ -77,6 +77,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
             $mainImageFile = $form->get('mainImage')->getData();
             if($mainImageFile) {

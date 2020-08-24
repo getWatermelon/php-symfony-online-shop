@@ -6,6 +6,7 @@ namespace App\Service\Page;
 
 
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 
 
 /**
@@ -20,13 +21,16 @@ class Navigation
      */
     private $categoryRepo;
 
+    private $productRepo;
+
     /**
      * Navigation constructor.
      * @param CategoryRepository $categoryRepo
      */
-    public function __construct(CategoryRepository $categoryRepo)
+    public function __construct(CategoryRepository $categoryRepo, ProductRepository $productRepo)
     {
         $this->categoryRepo = $categoryRepo;
+        $this->productRepo = $productRepo;
     }
 
     /**
@@ -42,5 +46,19 @@ class Navigation
     public function AllCategories()
     {
         return $this->categoryRepo->findAll();
+    }
+
+    public function getTopProducts()
+    {
+        return $this->productRepo->findBy([
+           'isTop' => true
+        ]);
+    }
+
+    public function getSaleProducts()
+    {
+        return $this->productRepo->findBy([
+            'isOnSale' => true
+        ]);
     }
 }
