@@ -29,16 +29,13 @@ class ProductController extends AbstractController
      */
     public function index(Product $product, SessionInterface $session)
     {
+//        $session->clear();
         $session->start();
-        $products = $session->has('order') ? $session->get('order') : [];
-        if (empty($products[$product->getId()])) {
-            $products[$product->getId()] = 0;
+        $products = $session->has('history') ? $session->get('history') : [];
+        if(empty($products[$product->getId()])) {
+            $products[$product->getId()] = $product->getId();
         }
-
-        $products[$product->getId()]++;
-
-        $session->set('order', $products);
-        return new Response();
+        $session->set('history', $products);
 
         $form = $this->createForm(CommentType::class, new Comment());
         return $this->render('product/index.html.twig', [

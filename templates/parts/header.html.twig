@@ -1,10 +1,10 @@
 {% block body %}
 <h1>
-{#    {% if app.session.get('order') is not empty %}#}
-{#        <h1>{{ dump(app.session.get('order')) }}</h1>#}
-{#    {% else %}#}
-{#        <h1>Session is empty</h1>#}
-{#    {% endif %}#}
+    {% if app.session.get('history') is not empty %}
+        <h1>{{ dump(app.session.get('history')) }}</h1>
+    {% else %}
+        <h1>Session is empty</h1>
+    {% endif %}
 </h1>
 <div class="agileits_header">
     <div class="w3l_offers">

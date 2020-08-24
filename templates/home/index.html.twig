@@ -139,12 +139,59 @@
         </div>
         <div class="clearfix"> </div>
     </div>
+
     <!-- top-brands -->
     <div class="top-brands">
         <div class="container">
             <h3>Hot Offers</h3>
             <div class="agile_top_brands_grids">
                 {% for product in navigation.saleProducts %}
+                    <div class="col-md-3 top_brand_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                <div class="tag"><img src="images/tag.png" alt=" " class="img-responsive" /></div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block" >
+                                            <div class="snipcart-thumb">
+                                                <a href="{{ path('product_show', {'id': product.id}) }}"><img title=" " alt=" " src="{{ asset('uploads/product_images/' ~ product.mainImage) }}" /></a>
+                                                <p>{{ product.title }}</p>
+                                                <h4> {{ product.getCurrentPrice()}} <span>{{ product.getCurrentSalePrice()}}</span></h4>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form action="checkout.html" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+                                                        <input type="hidden" name="amount" value="7.99" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- //top-brands -->
+
+    <!-- top-brands -->
+    <div class="top-brands">
+        <div class="container">
+            <h3>Top products</h3>
+            <div class="agile_top_brands_grids">
+                {% for product in navigation.topProducts %}
                     <div class="col-md-3 top_brand_left">
                     <div class="hover14 column">
                         <div class="agile_top_brand_left_grid">
@@ -185,12 +232,13 @@
     </div>
     <!-- //top-brands -->
 
-    <!-- top-brands -->
-    <div class="top-brands">
+    {% if navigation.historyProducts() is not empty %}
+        <!-- top-brands -->
+        <div class="top-brands">
         <div class="container">
-            <h3>Hot Offers</h3>
+            <h3>Recently viewed</h3>
             <div class="agile_top_brands_grids">
-                {% for product in navigation.topProducts %}
+                {% for product in navigation.historyProducts() %}
                     <div class="col-md-3 top_brand_left">
                         <div class="hover14 column">
                             <div class="agile_top_brand_left_grid">
@@ -233,7 +281,8 @@
             </div>
         </div>
     </div>
-    <!-- //top-brands -->
+        <!-- //top-brands -->
+    {% endif %}
 
     <!-- fresh-vegetables -->
     <div class="fresh-vegetables">
