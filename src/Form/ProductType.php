@@ -23,6 +23,7 @@ class ProductType extends AbstractType
             ->add('images', FileType::class, ['mapped' => false, 'multiple' => true, 'required' => false])
             ->add('isOnSale')
             ->add('isTop')
+            ->add('categories', null, ['by_reference' => false])
             ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var Product $product */

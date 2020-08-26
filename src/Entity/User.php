@@ -64,7 +64,7 @@ class User implements UserInterface
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $ratings;
 

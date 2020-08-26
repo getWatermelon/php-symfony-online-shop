@@ -236,6 +236,8 @@
                                 </div>
                                 <div class="tab3">
                                     <div class="single_page">
+                                        <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" alt=" "
+                                             class="img-fluid">
                                         {% for image in product.images %}
                                             <img src="{{ asset('uploads/product_images/') ~ image }}" alt=" "
                                                  class="img-fluid">

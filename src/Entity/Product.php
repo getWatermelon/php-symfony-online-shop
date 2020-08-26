@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
 
-    const DEFAULT_RATING = 3;
+    const DEFAULT_RATING = 4;
 
     /**
      * @ORM\Id()
@@ -227,14 +227,17 @@ class Product
     }
 
 
-    public function getCurrentPrice() : float
+    public function getCurrentPrice() : ?float
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('isCurrent', true));
 
         /** @var Price $currPrice */
-        $currPrice = $this->price->matching($criteria)->current();
-        return $currPrice->getValue();
+            $currPrice = $this->price->matching($criteria)->current();
+        if ($currPrice) {
+            return $currPrice->getValue();
+        }
+        return 0;
     }
 
     public function getCurrentSalePrice() : ?float
@@ -243,8 +246,12 @@ class Product
             ->andWhere(Criteria::expr()->eq('isSale', true));
 
         /** @var Price $currPrice */
+
         $currPrice = $this->price->matching($criteria)->current();
-        return $currPrice->getValue();
+        if ($currPrice) {
+            return $currPrice->getValue();
+        }
+        return 0;
     }
 
 

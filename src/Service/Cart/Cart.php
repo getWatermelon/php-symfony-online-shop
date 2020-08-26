@@ -10,15 +10,34 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Class Cart
+ * @package App\Service\Cart
+ */
 class Cart implements \Countable
 {
 
+    /**
+     * @var ProductRepository
+     */
     private $repository;
 
+    /**
+     * @var SessionInterface
+     */
     private $session;
 
+    /**
+     * @var EntityManagerInterface
+     */
     private $em;
 
+    /**
+     * Cart constructor.
+     * @param ProductRepository $repository
+     * @param SessionInterface $session
+     * @param EntityManagerInterface $em
+     */
     public function __construct(ProductRepository $repository, SessionInterface $session, EntityManagerInterface $em)
     {
         $this->repository = $repository;
@@ -26,6 +45,9 @@ class Cart implements \Countable
         $this->em = $em;
     }
 
+    /**
+     * @return \Generator
+     */
     public function getItems()
     {
         if ($this->session->has('order')) {
@@ -36,11 +58,17 @@ class Cart implements \Countable
         }
     }
 
+    /**
+     * @return bool
+     */
     public function isEmpty()
     {
         return empty($this->getProductsList());
     }
 
+    /**
+     * @return array
+     */
     private function getProductsList() : array
     {
         if (!$this->session->has('order')) {
@@ -65,6 +93,9 @@ class Cart implements \Countable
         return $count;
     }
 
+    /**
+     * @return float
+     */
     public function getTotal(): float
     {
         $cost = 0;
@@ -76,6 +107,9 @@ class Cart implements \Countable
         return $cost;
     }
 
+    /**
+     *
+     */
     public function clear()
     {
         if ($this->session->has('order')) {
@@ -84,6 +118,10 @@ class Cart implements \Countable
     }
 
 
+    /**
+     * @param Product $product
+     * @return array
+     */
     public function removeItemByProduct(Product $product)
     {
         if (!$this->session->has('order')) {
@@ -96,6 +134,10 @@ class Cart implements \Countable
         }
     }
 
+    /**
+     * @param Item $item
+     * @return array
+     */
     public function updateItem(Item $item)
     {
         if (!$this->session->has('order')) {

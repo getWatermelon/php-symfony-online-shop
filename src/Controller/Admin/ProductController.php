@@ -34,13 +34,27 @@ class ProductController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $mainImageFile = $form->get('mainImage')->getData();
+            if($mainImageFile) {
+                $mainImageName = ImageUploader::uploadImage($mainImageFile, $this->getParameter('product_images_directory'), $slugger);
+                $product->setMainImage($mainImageName);
+            }
+
+            $imageFiles = $form->get('images')->getData();
+            if($imageFiles){
+                $imagesName = ImageUploader::uploadImages($imageFiles, $this->getParameter('product_images_directory'), $slugger);
+                $product->setImages($imagesName);
+            }
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
