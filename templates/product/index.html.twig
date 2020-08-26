@@ -193,6 +193,8 @@
                                                         </p>
                                                     </div>
                                                     {% if is_granted('ROLE_USER') %}
+
+                                                        <div class="add-review">
                                                             <form action="{{ path('add_comment_reply', {'id' : product.id, 'commentId': comment.id}) }}"
                                                                   method="post">
                                                                 <textarea name="body" required=""></textarea>
