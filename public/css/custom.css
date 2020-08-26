@@ -88,3 +88,22 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+/*.add-review,*/
+/*input[type="checkbox"] {*/
+/*    display: none;*/
+/*}*/
+
+/*input[type="checkbox"]:checked ~ .add-review {*/
+/*    display: block;*/
+/*}*/
+
+/*!* Стилизация псевдокнопки *!*/
+/*.btn {*/
+/*    display: inline-block;*/
+/*    margin-bottom: 4px;*/
+/*    padding: 4px 8px;*/
+/*    background-color: #ffffff;*/
+/*    border: 1px solid #eeeeee;*/
+/*    cursor: pointer;*/
+/*}*/
+

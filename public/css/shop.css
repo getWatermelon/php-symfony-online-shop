@@ -941,6 +941,7 @@ color: #000;
 	float:left;
 	width:14%;
 }
+
 .bootstrap-tab-text-grid-right{
 	float:right;
 	width:83%;
@@ -964,6 +965,7 @@ color: #000;
 .bootstrap-tab-text-grid-right ul li a i{
 	left:-1em;
 }
+
 .bootstrap-tab-text-grids{
 	margin:3em 0 0 0em;
 }

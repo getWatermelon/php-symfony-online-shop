@@ -64,7 +64,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("admin/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("admin/user/edit/{id}", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, SluggerInterface $slugger): Response
     {
@@ -72,13 +72,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
             $imageFile = $form->get('image')->getData();
             if($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
                 $user->setImage($imageName);
             }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
         }
@@ -100,13 +103,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
             $imageFile = $form->get('image')->getData();
             if($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
                 $user->setImage($imageName);
             }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('index');
         }

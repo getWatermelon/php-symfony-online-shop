@@ -42,7 +42,7 @@ class Comment
     private $replyTo;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="replyTo")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="replyTo", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $comments;
 

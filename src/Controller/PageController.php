@@ -32,4 +32,9 @@ class PageController extends AbstractController
 //            'googleKey' => $googleKey
         ]);
     }
+
+    public function aboutUs()
+    {
+        return $this->render('page/about.html.twig');
+    }
 }

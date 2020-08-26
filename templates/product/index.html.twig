@@ -1,385 +1,379 @@
-{#{% extends 'base.html.twig' %}#}
+{# {% extends 'base.html.twig' %} #}
 
-{#<!--A Design by W3layouts#}
-{#   Author: W3layout#}
-{#   Author URL: http://w3layouts.com#}
-{#   License: Creative Commons Attribution 3.0 Unported#}
-{#   License URL: http://creativecommons.org/licenses/by/3.0/#}
-{#   -->#}
-{#<!DOCTYPE html>#}
-{#<html lang="zxx">#}
+{# <!--A Design by W3layouts #}
+{# Author: W3layout #}
+{# Author URL: http://w3layouts.com #}
+{# License: Creative Commons Attribution 3.0 Unported #}
+{# License URL: http://creativecommons.org/licenses/by/3.0/ #}
+{# --> #}
+{# <!DOCTYPE html> #}
+{# <html lang="zxx"> #}
 
 
 <head>
     {% block stylesheets %}
-    <title>{% block title %}{{ product.title }}{% endblock %}</title>
-    <!--meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+        <title>{% block title %}{{ product.title }}{% endblock %}</title>
+        <!--meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <!--//meta tags ends here-->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <!--booststrap-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-    <!--//booststrap end-->
-    <!-- font-awesome icons -->
-    <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
-    <!-- //font-awesome icons -->
-    <!--Shoping cart-->
-    <link rel="stylesheet" href="/css/shop.css" type="text/css" />
-    <!--//Shoping cart-->
-    <link rel="stylesheet" type="text/css" href="/css/jquery-ui1.css">
-    <link href="/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
-    <!--stylesheets-->
-    <link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
-    <!--//stylesheets-->
-    <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+        <!--//meta tags ends here-->
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        <!--booststrap-->
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+        <!--//booststrap end-->
+        <!-- font-awesome icons -->
+        <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+        <!-- //font-awesome icons -->
+        <!--Shoping cart-->
+        <link rel="stylesheet" href="/css/shop.css" type="text/css"/>
+        <!--//Shoping cart-->
+        <link rel="stylesheet" type="text/css" href="/css/jquery-ui1.css">
+        <link href="/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
+        <!--stylesheets-->
+        <link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+        <!--//stylesheets-->
+        <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     {% endblock %}
 </head>
 
 {% block body %}
-<body>
-<!--headder-->
-<div class="header-outs" id="home">
-    {% include 'parts/header.html.twig' %}
-</div>
-<!--//headder-->
-<!-- banner -->
-<div class="inner_page-banner one-img">
-</div>
-<!--//banner -->
-<!-- short -->
-<div class="using-border py-3">
-    <div class="inner_breadcrumb  ml-4">
-        <ul class="short_ls">
-            <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
-            {% for category in product.categories  %}
-                <li><a href="{{ path('category_index', {'id': category.id}) }}" >{{ category.title }}</a><span> |</span></li>
-            {% endfor %}
-            <li>{{ product.title }}</li>
-        </ul>
+    <body>
+    <!--headder-->
+    <div class="header-outs" id="home">
+        {% include 'parts/header.html.twig' %}
     </div>
-</div>
-<!-- //short-->
-<!--//banner -->
-<!--/shop-->
-<section class="banner-bottom py-lg-5 py-3">
-    <div class="container">
-        <div class="inner-sec-shop pt-lg-4 pt-3">
-            <div class="row">
-                <div class="col-lg-4 single-right-left ">
-                    <div class="grid images_3_of_2">
-                        <div class="flexslider1">
-                            <ul class="slides">
-                                <li data-thumb="{{ asset('uploads/product_images/' ~ product.mainImage) }}">
-                                    <div class="thumb-image"> <img src="{{ asset('uploads/product_images/' ~ product.mainImage) }}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                                </li>
-                                {% for image in  product.images %}
-                                    <li data-thumb="{{ asset('uploads/product_images/' ~ image) }}">
-                                        <div class="thumb-image"> <img src="{{ asset('uploads/product_images/' ~ image) }}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+    <!--//headder-->
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+    <!--//banner -->
+    <!-- short -->
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
+                {% for category in product.categories %}
+                    <li>
+                        <a href="{{ path('category_index', {'id': category.id}) }}">{{ category.title }}</a><span> |</span>
+                    </li>
+                {% endfor %}
+                <li>{{ product.title }}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //short-->
+    <!--//banner -->
+    <!--/shop-->
+    <section class="banner-bottom py-lg-5 py-3">
+        <div class="container">
+            <div class="inner-sec-shop pt-lg-4 pt-3">
+                <div class="row">
+                    <div class="col-lg-4 single-right-left ">
+                        <div class="grid images_3_of_2">
+                            <div class="flexslider1">
+                                <ul class="slides">
+                                    <li data-thumb="{{ asset('uploads/product_images/' ~ product.mainImage) }}">
+                                        <div class="thumb-image"><img
+                                                    src="{{ asset('uploads/product_images/' ~ product.mainImage) }}"
+                                                    data-imagezoom="true" class="img-fluid" alt=" "></div>
                                     </li>
-                                {% endfor %}
-                            </ul>
-                            <div class="clearfix"></div>
+                                    {% for image in  product.images %}
+                                        <li data-thumb="{{ asset('uploads/product_images/' ~ image) }}">
+                                            <div class="thumb-image"><img
+                                                        src="{{ asset('uploads/product_images/' ~ image) }}"
+                                                        data-imagezoom="true" class="img-fluid" alt=" "></div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-8 single-right-left simpleCart_shelfItem">
-                    <h3>{{ product.title }}</h3>
-                    {% if  product.isOnSale == 1 %}
-                        <p>
-                            <span class="item_price">{{ product.currentPrice }} $</span>
-                            <del>{{ product.currentSalePrice }} $</del>
-                        </p>
-                    {% else %}
-                        <p>
-                            <span class="item_price">{{ product.currentPrice }} $</span>
-                        </p>
-                    {% endif %}
-                    <div class="rating1">
+                    <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                        <h3>{{ product.title }}</h3>
+                        {% if  product.isOnSale == 1 %}
+                            <p>
+                                <span class="item_price">{{ product.currentPrice }} $</span>
+                                <del>{{ product.currentSalePrice }} $</del>
+                            </p>
+                        {% else %}
+                            <p>
+                                <span class="item_price">{{ product.currentPrice }} $</span>
+                            </p>
+                        {% endif %}
+                        <div class="rating1">
 						<span class="starRating">
                             {% for i in 5..1 %}
-                                <input id="rating{{ i }}" data-productid="{{ product.id }}" type="radio" name="rating" value="{{ i }}" {{ i == product.getCurrentRating ? 'checked' :'' }}>
+                                <input id="rating{{ i }}" data-productid="{{ product.id }}" type="radio" name="rating"
+                                       value="{{ i }}" {{ i == product.getCurrentRating ? 'checked' :'' }}>
                                 <label for="rating{{ i }}">{{ i }}</label>
                             {% endfor %}
 						</span>
-                        <img src="{{ asset('images/ajax_preloader.gif') }}" class="preloader" style="display: none"/>
-                    </div>
+                            <img src="{{ asset('images/ajax_preloader.gif') }}" class="preloader"
+                                 style="display: none"/>
+                        </div>
 
-                    <div class="description">
-                        <h5>Description: </h5>
-                        <p>{{ product.description }}</p>
-                    </div>
+                        <div class="description">
+                            <h5>Description: </h5>
+                            <p>{{ product.description }}</p>
+                        </div>
 
-                    <div class="occasion-cart">
-                        <div class="toys single-item singlepage">
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="toys_item" value="Farenheit">
-                                <input type="hidden" name="amount" value="575.00">
-                                <button type="submit" data-productid="{{ product.id }}" value="Add to cart" class="toys-cart ptoys-cart add">
-                                    Add to Cart
-                                </button>
-                            </form>
+                        <div class="occasion-cart">
+                            <div class="toys single-item singlepage">
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="toys_item" value="Farenheit">
+                                    <input type="hidden" name="amount" value="575.00">
+                                    <button type="submit" data-productid="{{ product.id }}" value="Add to cart"
+                                            class="toys-cart ptoys-cart add">
+                                        Add to Cart
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="clearfix"> </div>
-                <!--/tabs-->
-                <div class="responsive_tabs">
-                    <div id="horizontalTab">
-                        <ul class="resp-tabs-list">
-                            <li>Specifications</li>
-                            <li>Reviews</li>
-                            <li>Photos</li>
-                        </ul>
-                        <div class="resp-tabs-container">
-                            <!--/tab_one-->
-                            <div class="tab1">
-                                <div class="single_page">
-                                    <p>
-                                        {{ product.description }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!--//tab_one-->
-                            <div class="tab2">
-                                <div class="single_page">
-                                    {% for comment in product.getTopComments %}
-                                    <div class="bootstrap-tab-text-grids">
-                                        <div class="bootstrap-tab-text-grid">
-                                            <div class="bootstrap-tab-text-grid-left">
-                                                <p class="text-secondary text-center">{{ comment.createdAt|comment_date }}</p>
-                                                <img src="{{ asset('uploads/user_images/' ~ comment.user.image) }}" alt=" " class="img-fluid">
-                                            </div>
-                                            <div class="bootstrap-tab-text-grid-right">
-                                                <ul>
-                                                    <li><a href="#">{{ comment.user.name }}</a></li>
-                                                    <li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
-                                                </ul>
-                                                <p>
-                                                    {{ comment.body }}
-                                                </p>
-                                            </div>
-                                            {% if is_granted('ROLE_USER') %}
-                                                <div class="add-review">
-                                                    <form action="{{ path('add_comment_reply', {'id' : product.id, 'commentId': comment.id}) }}" method="post">
-                                                        <textarea name="body" required=""></textarea>
-                                                        <input type="submit" value="SEND">
-                                                        <input type="hidden" name="token" value="{{ csrf_token('comment-token') }}"/>
-                                                    </form>
-                                                </div>
-                                            {% endif %}
-                                            <div class="clearfix"> </div>
-                                            {% for subcomment in comment.getComments %}
-                                                <div class="bootstrap-tab-text-grids">
-                                                    <div class="bootstrap-tab-text-grid">
-                                                        <div class="bootstrap-tab-text-grid-left">
-                                                            <p class="text-secondary text-center">{{ comment.createdAt|comment_date }}</p>
-                                                            <img src="{{ asset('uploads/user_images/' ~ subcomment.user.image) }}" alt=" " class="img-fluid">
-                                                        </div>
-                                                        <div class="bootstrap-tab-text-grid-right">
-                                                            <ul>
-                                                                <li><a href="#">{{ subcomment.user.name }}</a></li>
-                                                                <li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
-                                                            </ul>
-                                                            <p>
-                                                                {{ subcomment.body }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="clearfix"> </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
+                    <div class="clearfix"></div>
+                    <!--/tabs-->
+                    <div class="responsive_tabs">
+                        <div id="horizontalTab">
+                            <ul class="resp-tabs-list">
+                                <li>Specifications</li>
+                                <li>Reviews</li>
+                                <li>Photos</li>
+                            </ul>
+                            <div class="resp-tabs-container">
+                                <!--/tab_one-->
+                                <div class="tab1">
+                                    <div class="single_page">
+                                        <p>
+                                            {{ product.description }}
+                                        </p>
                                     </div>
-                                {% endfor %}
-                                    {% if is_granted('ROLE_USER') %}
-                                        <h4>add a review</h4>
-                                        {{ include('comment/_form.html.twig') }}
-                                    {% endif %}
                                 </div>
-                            </div>
-                            <div class="tab3">
-                                <div class="single_page">
-                                    {% for image in product.images %}
-                                        <img src="{{ asset('uploads/product_images/') ~ image }}" alt=" " class="img-fluid">
-                                    {% endfor %}
+                                <!--//tab_one-->
+                                <div class="tab2">
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+                                    <script>
+                                        $('.btn').click(function(){
+                                            $(".dd-review").fadeToggle(100);
+                                        });
+                                    </script>
+                                    <div class="single_page">
+                                        {% for comment in product.getTopComments %}
+                                            <div class="bootstrap-tab-text-grids">
+                                                <div class="bootstrap-tab-text-grid">
+                                                    <div class="bootstrap-tab-text-grid-left">
+                                                        <p class="text-secondary text-center">{{ comment.createdAt|comment_date }}</p>
+                                                        <img src="{{ asset('uploads/user_images/' ~ comment.user.image) }}"
+                                                             alt=" " class="img-fluid">
+                                                    </div>
+                                                    <div class="bootstrap-tab-text-grid-right">
+                                                        <ul>
+                                                            <li><a href="{{ path('user_show', {'id' : comment.user.id }) }}">{{ comment.user.name }}</a></li>
+{#                                                            <li><label for="pseudoBtn" class="btn"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</label></li>#}
+{#                                                            <li><input type="checkbox" id="pseudoBtn"></li>#}
+                                                            <li><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</li>
+                                                        </ul>
+                                                        <p>
+                                                            {{ comment.body }}
+                                                        </p>
+                                                    </div>
+                                                    {% if is_granted('ROLE_USER') %}
+                                                            <form action="{{ path('add_comment_reply', {'id' : product.id, 'commentId': comment.id}) }}"
+                                                                  method="post">
+                                                                <textarea name="body" required=""></textarea>
+                                                                <input type="submit" value="Reply">
+                                                                <input type="hidden" name="token"
+                                                                       value="{{ csrf_token('comment-token') }}"/>
+                                                            </form>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="clearfix"></div>
+                                                    {% for subcomment in comment.getComments %}
+                                                        <div class="bootstrap-tab-text-grids">
+                                                            <div class="bootstrap-tab-text-grid">
+                                                                <div class="bootstrap-tab-text-grid-left">
+                                                                    <p class="text-secondary text-center">{{ comment.createdAt|comment_date }}</p>
+                                                                    <img src="{{ asset('uploads/user_images/' ~ subcomment.user.image) }}"
+                                                                         alt=" " class="img-fluid">
+                                                                </div>
+                                                                <div class="bootstrap-tab-text-grid-right">
+                                                                    <ul>
+                                                                        <li><a href="#">{{ subcomment.user.name }}</a>
+                                                                    </ul>
+                                                                    <p>
+                                                                        {{ subcomment.body }}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% if is_granted('ROLE_USER') %}
+                                            <h4>add a review</h4>
+                                            {{ include('comment/_form.html.twig') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="tab3">
+                                    <div class="single_page">
+                                        {% for image in product.images %}
+                                            <img src="{{ asset('uploads/product_images/') ~ image }}" alt=" "
+                                                 class="img-fluid">
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--//tabs-->
-            </div>
-        </div>
-    </div>
-</section>
-<!--subscribe-address-->
-<section class="subscribe">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 map-info-right px-0">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
-            </div>
-            <div class="col-lg-6 col-md-6 address-w3l-right text-center">
-                <div class="address-gried ">
-                    <span class="far fa-map"></span>
-                    <p>25478 Road St.121<br>USA New Hill
-                    <p>
-                </div>
-                <div class="address-gried mt-3">
-                    <span class="fas fa-phone-volume"></span>
-                    <p> +(000)123 4565<br>+(010)123 4565</p>
-                </div>
-                <div class=" address-gried mt-3">
-                    <span class="far fa-envelope"></span>
-                    <p><a href="mailto:info@example.com">info@example1.com</a>
-                        <br><a href="mailto:info@example.com">info@example2.com</a>
-                    </p>
+                    <!--//tabs-->
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-{% include 'parts/footer.html.twig' %}
+    {% include 'parts/footer.html.twig' %}
 
-{% block javascripts %}
-<!--jQuery-->
-<script src="/js/jquery-2.2.3.min.js"></script>
-<!-- newsletter modal -->
-<!-- cart-js -->
-{#<script src="/js/minicart.js"></script>#}
-<script>
-    toys.render();
+    {% block javascripts %}
+        <!--jQuery-->
+        <script src="/js/jquery-2.2.3.min.js"></script>
+        <!-- newsletter modal -->
+        <!-- cart-js -->
+        {# <script src="/js/minicart.js"></script> #}
+        <script>
+            toys.render();
 
-    toys.cart.on('toys_checkout', function (evt) {
-        var items, len, i;
+            toys.cart.on('toys_checkout', function (evt) {
+                var items, len, i;
 
-        if (this.subtotal() > 0) {
-            items = this.items();
+                if (this.subtotal() > 0) {
+                    items = this.items();
 
-            for (i = 0, len = items.length; i < len; i++) {}
-        }
-    });
-</script>
-<!-- //cart-js -->
-<!-- price range (top products) -->
-<script src="/js/jquery-ui.js"></script>
-<script>
-    //<![CDATA[
-    $(window).load(function () {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 9000,
-            values: [50, 6000],
-            slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+                    for (i = 0, len = items.length; i < len; i++) {
+                    }
+                }
+            });
+        </script>
+        <!-- //cart-js -->
+        <!-- price range (top products) -->
+        <script src="/js/jquery-ui.js"></script>
+        <script>
+            //<![CDATA[
+            $(window).load(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 9000,
+                    values: [50, 6000],
+                    slide: function (event, ui) {
+                        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    }
+                });
+                $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 
-    }); //]]>
-</script>
-<!-- //price range (top products) -->
-<!-- single -->
-<script src="/js/imagezoom.js"></script>
-<!-- single -->
-<!-- script for responsive tabs -->
-<script src="/js/easy-responsive-tabs.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#horizontalTab').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            closed: 'accordion', // Start closed if in accordion view
-            activate: function (event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#tabInfo');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-        $('#verticalTab').easyResponsiveTabs({
-            type: 'vertical',
-            width: 'auto',
-            fit: true
-        });
-    });
-</script>
-<!-- FlexSlider -->
-<script src="/js/jquery.flexslider.js"></script>
-<script>
-    // Can also be used with $(document).ready()
-    $(window).load(function () {
-        $('.flexslider1').flexslider({
-            animation: "slide",
-            controlNav: "thumbnails"
-        });
-    });
-</script>
-<!-- //FlexSlider-->
-<!-- start-smoth-scrolling -->
-<script src="/js/move-top.js"></script>
-<script src="/js/easing.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-            $('html,body').animate({
-                scrollTop: $(this.hash).offset().top
-            }, 900);
-        });
-    });
-</script>
-<!-- start-smoth-scrolling -->
-<!-- here stars scrolling icon -->
-<script>
-    $(document).ready(function () {
+            }); //]]>
+        </script>
+        <!-- //price range (top products) -->
+        <!-- single -->
+        <script src="/js/imagezoom.js"></script>
+        <!-- single -->
+        <!-- script for responsive tabs -->
+        <script src="/js/easy-responsive-tabs.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#horizontalTab').easyResponsiveTabs({
+                    type: 'default', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    activate: function (event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#tabInfo');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+                $('#verticalTab').easyResponsiveTabs({
+                    type: 'vertical',
+                    width: 'auto',
+                    fit: true
+                });
+            });
+        </script>
+        <!-- FlexSlider -->
+        <script src="/js/jquery.flexslider.js"></script>
+        <script>
+            // Can also be used with $(document).ready()
+            $(window).load(function () {
+                $('.flexslider1').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                });
+            });
+        </script>
+        <!-- //FlexSlider-->
+        <!-- start-smoth-scrolling -->
+        <script src="/js/move-top.js"></script>
+        <script src="/js/easing.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({
+                        scrollTop: $(this.hash).offset().top
+                    }, 900);
+                });
+            });
+        </script>
+        <!-- start-smoth-scrolling -->
+        <!-- here stars scrolling icon -->
+        <script>
+            $(document).ready(function () {
 
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
+                var defaults = {
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
+                };
 
 
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
+                $().UItoTop({
+                    easingType: 'easeOutQuart'
+                });
 
-    });
-</script>
-<!-- //here ends scrolling icon -->
-<!-- //smooth-scrolling-of-move-up -->
-<!--bootstrap working-->
-<script src="/js/bootstrap.min.js"></script>
-<!-- //bootstrap working-->
-<script src="{{ asset('js/cart.js') }}"></script>
-<script>
-    let TOKEN = '{{ csrf_token('add_to_cart') }}'
-</script>
-    {% if is_granted('ROLE_USER') %}
+            });
+        </script>
+        <!-- //here ends scrolling icon -->
+        <!-- //smooth-scrolling-of-move-up -->
+        <!--bootstrap working-->
+        <script src="/js/bootstrap.min.js"></script>
+        <!-- //bootstrap working-->
+        <script src="{{ asset('js/cart.js') }}"></script>
+        <script>
+            let TOKEN = '{{ csrf_token('add_to_cart') }}'
+        </script>
+        {% if is_granted('ROLE_USER') %}
         <script src="{{ asset('js/vote.js') }}"></script>
-    {% endif %}
-{% endblock %}
-</body>
+        {% endif %}
+    {% endblock %}
+    </body>
 {% endblock %}

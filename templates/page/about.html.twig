@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <body>
+    <div class="header-outs" id="home">
+        {% include 'parts/header.html.twig' %}
+    </div>
+    <!--//header-->
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
+                <li>About Us</li>
+            </ul>
+        </div>
+    </div>
+
+    <!--About -->
+    <section class="about py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">About Us</h3>
+            <div class="about-innergrid-agile text-center">
+                <h4>Welcome To Our WebSite</h4>
+                <div class="address-gried ">
+                    <img href="https://beetroot.academy/" src="{{ asset('images/beetroot-academy.png') }}" alt=" " class="img-fluid" style="width: 300px">
+                    <p class="mb-3">
+                        This website was made by Ivan Myasoyedov
+                        as a beetroot diploma project.
+                        Please don't buy anything here)
+                    </p>
+                    <p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//about -->
+
+    <!--//Product-about-->
+    {% include '/parts/footer.html.twig' %}
+    </body>
+{% endblock %}

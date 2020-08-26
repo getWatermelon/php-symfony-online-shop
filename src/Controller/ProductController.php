@@ -57,8 +57,14 @@ class ProductController extends AbstractController
         if (!$this->isCsrfTokenValid('add_to_cart', $token)) {
             throw new BadRequestException('Wrong CSRF token. Are you robot?');
         }
+        foreach ($this->getUser()->getRatings() as &$rating){
+            if ($rating->getProduct() == $product){
+                $this->getUser()->removeRating($rating);
+            }
+        }
         $vote = new Rating();
         $vote->setValue($voteVal);
+        $vote->setUser($this->getUser());
         $product->addRating($vote);
         $em->persist($vote);
         $em->persist($product);

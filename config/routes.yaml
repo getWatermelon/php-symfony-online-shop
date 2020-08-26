@@ -47,6 +47,11 @@ page_contact_us:
     methods:    [GET, POST]
     controller: App\Controller\PageController::contactUs
 
+page_about_us:
+    path: /about_us
+    methods:    GET
+    controller: App\Controller\PageController::aboutUs
+
 app_login:
     path: /login
     controller: App\Controller\SecurityController::login
