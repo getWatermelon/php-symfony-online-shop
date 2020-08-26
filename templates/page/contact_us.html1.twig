@@ -1,0 +1,253 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PageController!{% endblock %}
+
+{% block body %}
+    <!-- header -->
+    {{ include('parts/header.html.twig') }}
+    <!-- //script-for sticky-nav -->
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                    <li><a href="events.html">Events</a><i>/</i></li>
+                    <li><a href="about.html">About Us</a><i>/</i></li>
+                    <li><a href="products.html">Best Deals</a><i>/</i></li>
+                    <li><a href="services.html">Services</a></li>
+                </ul>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="phone_email">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+                <li>Mail Us</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //products-breadcrumb -->
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_left">
+            <nav class="navbar nav_bottom">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                {% include 'parts/category_sidebar.html.twig' %}
+            </nav>
+        </div>
+        <div class="w3l_banner_nav_right">
+            <!-- mail -->
+            <div class="mail">
+                <h3>Mail Us</h3>
+                <div class="agileinfo_mail_grids">
+                    <div class="col-md-4 agileinfo_mail_grid_left">
+                        <ul>
+                            <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                            <li>address<span>868 1st Avenue NYC.</span></li>
+                        </ul>
+                        <ul>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+                            <li>email<span><a href="mailto:info@example.com">info@example.com</a></span></li>
+                        </ul>
+                        <ul>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                            <li>call to us<span>(+123) 233 2362 826</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 agileinfo_mail_grid_right">
+                        {% for error in errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error.message }}
+                            </div>
+                        {% endfor %}
+                        <form method="post">
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" name="contact[name]" placeholder="Name*" >
+                                <input type="email" name="contact[email]" placeholder="Email*"  >
+                            </div>
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" name="contact[phone]" placeholder="Telephone*" >
+                                <input type="text" name="contact[subject]" placeholder="Subject*" >
+                            </div>
+                            <div class="clearfix"> </div>
+                            <textarea  name="contact[message]" placeholder="Message..."></textarea>
+                            <input type="submit" value="Отправить">
+                            <input type="reset" value="Очистить">
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <!-- //mail -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- //banner -->
+    <!-- map -->
+    <div class="map">
+        <iframe
+                frameborder="0" style="border:0"
+{#                src="https://www.google.com/maps/embed/v1/place?key={{ googleKey }}#}
+    &q=Одеса, Корольова 5/4" allowfullscreen>
+        </iframe>
+    </div>
+    <!-- //map -->
+    <!-- newsletter -->
+    <div class="newsletter">
+        <div class="container">
+            <div class="w3agile_newsletter_left">
+                <h3>sign up for our newsletter</h3>
+            </div>
+            <div class="w3agile_newsletter_right">
+                <form action="#" method="post">
+                    <input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                    <input type="submit" value="subscribe now">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //newsletter -->
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-3 w3_footer_grid">
+                <h3>information</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Best Deals</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="short-codes.html">Short Codes</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>policy info</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="faqs.html">FAQ</a></li>
+                    <li><a href="privacy.html">privacy policy</a></li>
+                    <li><a href="privacy.html">terms of use</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>what in stores</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="pet.html">Pet Food</a></li>
+                    <li><a href="frozen.html">Frozen Snacks</a></li>
+                    <li><a href="kitchen.html">Kitchen</a></li>
+                    <li><a href="products.html">Branded Foods</a></li>
+                    <li><a href="household.html">Households</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>twitter posts</h3>
+                <ul class="w3_footer_grid_list1">
+                    <li><label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>Non numquam <a href="#">http://sd.ds/13jklf#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://sd.ds/1389kjklf#</a>quo nulla.</span></li>
+                    <li><label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>Con numquam <a href="#">http://fd.uf/56hfg#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://fd.uf/56hfg#</a>quo nulla.</span></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="agile_footer_grids">
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h4>100% secure payments</h4>
+                        <img src="images/card.png" alt=" " class="img-responsive" />
+                    </div>
+                </div>
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h5>connect with us</h5>
+                        <ul class="agileits_social_icons">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="wthree_footer_copy">
+                <p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".dropdown").hover(
+                function() {
+                    $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function() {
+                    $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <script src="js/minicart.js"></script>
+    <script>
+        paypal.minicart.render();
+        paypal.minicart.cart.on('checkout', function (evt) {
+            var items = this.items(),
+                len = items.length,
+                total = 0,
+                i;
+            // Count the number of each item in the cart
+            for (i = 0; i < len; i++) {
+                total += items[i].get('quantity');
+            }
+            if (total < 3) {
+                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+                evt.preventDefault();
+            }
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+{% endblock %}

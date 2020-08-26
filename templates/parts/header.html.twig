@@ -1,109 +1,112 @@
-{% block body %}
-<h1>
-    {% if app.session.get('history') is not empty %}
-        <h1>{{ dump(app.session.get('history')) }}</h1>
-    {% else %}
-        <h1>Session is empty</h1>
-    {% endif %}
-</h1>
-<div class="agileits_header">
-    <div class="w3l_offers">
-        <a href="products.html">Today's special Offers !</a>
+<div class="header-bar">
+    <div class="container-fluid">
+        <div class="hedder-up row">
+            <div class="col-lg-3 col-md-3 logo-head">
+                <h1><a class="navbar-brand" href="{{ path('index') }}">Hardware-Shop</a></h1>
+            </div>
+            <div class="col-lg-5 col-md-6 search-right">
+                <form class="form-inline my-lg-0" action="{{ path('search_products') }}">
+                    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search">
+                    <button class="btn" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-3 right-side-cart">
+                <div class="cart-icons">
+                    <ul>
+                        {% if is_granted('ROLE_USER') %}
+                            <li>
+                                <img href="" src="{{ asset('/uploads/user_images/' ~ app.user.image) }}" alt="" class="img-fluid" style="width: 25px; border-radius: 30%">
+                            </li>
+                            <span><a style="color: #ffffff">{{ app.user.name }}</a></span>
+                        {% endif %}
+
+                        <li>
+                            <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
+                        </li>
+                        <li class="toyscart toyscart2 cart cart box_1">
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+                                <button id="show_cart" class="top_toys_cart" type="submit" name="submit" value="">
+                                    <span class="fas fa-cart-arrow-down"></span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="w3l_search">
-        <form action="#" method="post">
-            <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-            <input type="submit" value=" ">
-        </form>
-    </div>
-    <div class="product_list_header">
-        <form action="#" method="post" class="last">
-            <fieldset>
-                <input type="hidden" name="cmd" value="_cart" />
-                <input type="hidden" name="display" value="1" />
-                <input type="submit" name="submit" id="show_cart" value="View your cart" class="button" />
-            </fieldset>
-        </form>
-    </div>
-    {% if is_granted('ROLE_USER') %}
-        <span><a style="color: #1adeed">{{ app.user.username }}</a></span>
-    {% endif %}
-    <div class="w3l_header_right">
-        <ul>
-            <li class="dropdown profile_details_drop">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-                <div class="mega-dropdown-menu">
-                    <div class="w3ls_vegetables">
-                        <ul class="dropdown-menu drp-mnu">
-                            {% if not is_granted('ROLE_USER') %}
-                                <li><a href="{{ path('app_login') }}">Войти</a></li>
-                                <li><a href="{{ path('app_register') }}">Зарегистрироваться</a></li>
-                            {% else %}
-                                <li><a href="{{ path('app_order_history') }}">Мои Заказы</a></li>
-                                <li><a href="{{ path('app_logout') }}">Выйти</a></li>
-                            {% endif %}
-                        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About Us</a>
+                </li>
+                {% for cat in navigation.getMenu %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('category_index', {'id': cat.id}) }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ cat.title }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for subcat in cat.categories %}
+                            <a class="nav-link" href="{{ path('category_index', {'id': subcat.id}) }}">{{ subcat.title }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <a href="{{ path('page_contact_us') }}" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- Modal 1-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% if is_granted('ROLE_USER') %}
+            <div class="modal-body">
+                <div class="fields-grid">
+                    <button type="submit" class="btn subscrib-btnn"><a href="{{ path('app_order_history') }}">My Orders</a></button>
+                    <button type="submit" class="btn subscrib-btnn"><a href="{{ path('app_logout') }}">Exit</a></button>
+                    <button type="submit" class="btn subscrib-btnn"><a href="{{ path('profile_edit', {'id': app.user.id}) }}">Edit profile</a></button>
+                </div>
+            </div>
+        </div>
+        {% else %}
+                <div class="modal-body">
+                    <div class="register-form">
+                        <form action="{{ path('app_login') }}" method="post">
+                            <div class="fields-grid">
+                                <div class="styled-input">
+                                    <input type="text" name="email" placeholder="Username" required=" ">
+                                    <input type="password" name="password" placeholder="Password" required=" ">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                                </div>
+                                <button type="submit" class="btn subscrib-btnn">Login</button>
+                                <button type="submit" class="btn subscrib-btnn"><a href="{{ path('app_register') }}">Register</a></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </li>
-        </ul>
+            {% endif %}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-    <div class="w3l_header_right1">
-        <h2><a href="{{ path('page_contact_us') }}">Contact Us</a></h2>
-    </div>
-    <div class="clearfix"> </div>
 </div>
-<!-- script-for sticky-nav -->
-<script>
-    $(document).ready(function() {
-        var navoffeset=$(".agileits_header").offset().top;
-        $(window).scroll(function(){
-            var scrollpos=$(window).scrollTop();
-            if(scrollpos >=navoffeset){
-                $(".agileits_header").addClass("fixed");
-            }else{
-                $(".agileits_header").removeClass("fixed");
-            }
-        });
-
-    });
-</script>
-<!-- //script-for sticky-nav -->
-{#<div class="logo_products">#}
-{#    <div class="container">#}
-{#        <div class="w3ls_logo_products_left">#}
-{#            <h1><a href="index.html"><span>Grocery</span> Store</a></h1>#}
-{#        </div>#}
-{#        <div class="w3ls_logo_products_left1">#}
-{#            <ul class="special_items">#}
-{#                <li><a href="events.html">Events</a><i>/</i></li>#}
-{#                <li><a href="about.html">About Us</a><i>/</i></li>#}
-{#                <li><a href="products.html">Best Deals</a><i>/</i></li>#}
-{#                <li><a href="services.html">Services</a></li>#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div class="w3ls_logo_products_left1">#}
-{#            <ul class="phone_email">#}
-{#                <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>#}
-{#                <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div class="clearfix"> </div>#}
-{#    </div>#}
-{#</div>#}
-{#<!-- //header -->#}
-{#<!-- products-breadcrumb -->#}
-{#<div class="products-breadcrumb">#}
-{#    <div class="container">#}
-{#        <ul>#}
-{#            <li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a><span>|</span></li>#}
-{#            {% if category%}#}
-{#                <li>{{ category.title }}</li>#}
-{#            {% elseif product%}#}
-{#                <li>{{ product.title }}</li>#}
-{#            {% endif %}#}
-{#        </ul>#}
-{#    </div>#}
-{#</div>#}
-{#<!-- //products-breadcrumb -->#}
-{% endblock %}

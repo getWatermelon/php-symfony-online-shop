@@ -4,3 +4,4 @@ twig:
         # the value is the service's id
         navigation: '@App\Service\Page\Navigation'
         app_domain: '%app.domain%'
+        googleKey: '%env(GOOGLE_API)%'

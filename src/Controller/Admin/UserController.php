@@ -3,20 +3,25 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\UserProfileType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\Upload\ImageUploader;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
- * @Route("admin/user")
+ * @Route("/")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("admin/user/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -26,7 +31,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route("admin/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +54,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("admin/user/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -59,15 +64,21 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("admin/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $imageFile = $form->get('image')->getData();
+            if($imageFile) {
+                $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
+                $user->setImage($imageName);
+            }
 
             return $this->redirectToRoute('user_index');
         }
@@ -79,7 +90,37 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("admin/user/profile/{id}/edit", name="profile_edit", methods={"GET","POST"})
+     */
+    public function showProfile(Request $request, User $user, SluggerInterface $slugger): Response
+    {
+//        $user = $this->getUser();
+
+        $form = $this->createForm(UserProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $imageFile = $form->get('image')->getData();
+            if($imageFile) {
+                $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
+                $user->setImage($imageName);
+            }
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('admin/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+
+//        return $this->edit($request, $this->getUser());
+    }
+
+    /**
+     * @Route("admin/user/{id}", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
@@ -27,7 +27,7 @@
 {#                <td>{{ user.password }}</td>#}
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>{{ user.name }}</td>
-                <td>{{ user.image }}</td>
+                <td><img src="{{ asset('uploads/user_images/' ~ user.image) }}" style="width: 150px"></td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

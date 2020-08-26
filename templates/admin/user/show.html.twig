@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}User{% endblock %}
 
@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ user.image }}</td>
+                <td><img src="{{ asset('uploads/user_images/' ~ user.image) }}" style="width: 150px"></td>
             </tr>
         </tbody>
     </table>

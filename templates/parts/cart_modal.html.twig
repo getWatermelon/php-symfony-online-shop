@@ -1,8 +1,8 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: fit-content">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Корзина</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,16 +12,16 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Название</th>
-                            <th scope="col">Количество</th>
-                            <th scope="col">Стоимость</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Cost</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in cart.getItems %}
                             <tr>
                                 <th scope="row">
-                                    <img src="{{ asset('uploads/product_images/' ~ item.getProduct.image) }}" style="width:100px;"/>
+                                    <img src="{{ asset('uploads/product_images/' ~ item.getProduct.mainImage) }}" style="width:100px;"/>
                                     <a href="{{ path('product_show', {'id': item.getProduct.id}) }}">{{ item.getTitle }}</a>
                                 </th>
                                 <td>{{ item.getCount }}</td>
@@ -31,84 +31,16 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <p>Ваша корзина пуста</p>
+                    <p>Your cart is empty</p>
                 {% endif %}
             </div>
             <div class="modal-footer">
                 {% if not cart.empty %}
-                    <a href="{{ path('checkout') }}" class="btn btn-primary">Перейти к оплате</a>
+                    <a href="{{ path('checkout') }}" class="btn btn-primary">Checkout</a>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
-{#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
-{#    <div class="modal-dialog" role="document">#}
-{#        <div class="modal-content">#}
-{#            <div class="modal-header">#}
-{#                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
-{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                    <span aria-hidden="true">&times;</span>#}
-{#                </button>#}
-{#            </div>#}
-{#            <div class="modal-body">#}
-{#                <ul>#}
-{#                    {% for product in products %}#}
-{#                        <li>#}
-{#                            {{ product.title }}#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            </div>#}
-{#            <div class="modal-footer">#}
-{#                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
-{#                <button type="button" class="btn btn-primary">Save changes</button>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
-{#    <div class="modal-dialog" role="document">#}
-{#        <div class="modal-content">#}
-{#            <div class="modal-header">#}
-{#                <h5 class="modal-title" id="exampleModalLabel">Корзина</h5>#}
-{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                    <span aria-hidden="true">&times;</span>#}
-{#                </button>#}
-{#            </div>#}
-{#            <div class="modal-body">#}
-{#                {% if products is not empty %}#}
-{#                    <table class="table table-hover">#}
-{#                        <thead>#}
-{#                        <tr>#}
-{#                            <th scope="col">Название</th>#}
-{#                            <th scope="col">Количество</th>#}
-{#                            <th scope="col">Стоимость</th>#}
-{#                        </tr>#}
-{#                        </thead>#}
-{#                        <tbody>#}
-{#                        {% for product in products %}#}
-{#                            <tr>#}
-{#                                <th scope="row">#}
-{#                                    <img src="{{asset('uploads/product_images/' ~ product.image) }}" style="width:100px" />#}
-{#                                    <a href="{{ path('product_show', {'id': product.id}) }}">{{ product.getTitle }}</a>#}
-{#                                </th>#}
-{#                                <td>{{ product.getCount }}</td>#}
-{#                                <td>{{ product.getCost }}</td>#}
-{#                            </tr>#}
-{#                        {% endfor %}#}
-{#                        </tbody>#}
-{#                    </table>#}
-{#                {% else %}#}
-{#                    <p>Ваша корзина пуста</p>#}
-{#                {% endif %}#}
-{#            </div>#}
-{#            <div class="modal-footer">#}
-{#                {% if not cart.empty %}#}
-{#                    <a href="{{ path('checkout') }}" class="btn btn-primary">Перейти к оплате</a>#}
-{#                    <a href="#" class="btn btn-primary">Перейти к оплате</a>#}
-{#                {% endif %}#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+
 {#</div>#}

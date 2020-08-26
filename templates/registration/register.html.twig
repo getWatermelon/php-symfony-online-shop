@@ -2,22 +2,76 @@
 
 {% block title %}Register{% endblock %}
 
+
 {% block body %}
+
+    <!--header-->
+    <div class="header-outs" id="home">
+        {% include 'parts/header.html.twig' %}
+    </div>
+    <!--//header-->
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+    <!--//banner -->
+    <!-- short -->
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
+                <li>Register</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //short-->
+
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <div class="container py-xl-5 py-sm-3">
+    <!-- forms -->
+    <section class="typo-section py-4 border-top border-bottom">
+        <h3 class="typo-main-heading mb-lg-4 mb-3 pr-3 pb-1">Register</h3>
+        <!-- form1 -->
+        {{ form_start(registrationForm) }}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form_row(registrationForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Your Userame'}}) }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Your Password'}}, {label: 'Password'}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.image) }}
+            </div>
+            <div class="form-group">
+                    {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        {{ form_end(registrationForm) }}
+        <!--// form1 -->
+    </section>
+    <!--// forms -->
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.image) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+{#    {{ form_widget(form.username, {'attr': {'class': 'billing-address-name form-control', 'placeholder': 'Yout full name'}}) }}#}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+{#    {{ form_start(registrationForm) }}#}
+{#        {{ form_row(registrationForm.name) }}#}
+{#        {{ form_row(registrationForm.email) }}#}
+{#        {{ form_row(registrationForm.image) }}#}
+{#        {{ form_row(registrationForm.plainPassword, {#}
+{#            label: 'Password'#}
+{#        }) }}#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
+
+{#        <button type="submit" class="btn">Register</button>#}
+{#    {{ form_end(registrationForm) }}#}
+    {% include 'parts/footer.html.twig' %}
 {% endblock %}
+

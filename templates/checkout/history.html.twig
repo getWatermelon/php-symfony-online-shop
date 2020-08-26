@@ -1,183 +1,202 @@
-{% extends 'base.html.twig' %}
+{#{% block title %}Checkout{% endblock %}#}
 
-{% block title %}Hello CheckoutController!{% endblock %}
+{% block stylesheets %}
+    <head>
+        <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+        <!--meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
 
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+        <!--//meta tags ends here-->
+        <!--booststrap-->
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+        <!--//booststrap end-->
+        <!-- font-awesome icons -->
+        <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+        <!-- //font-awesome icons -->
+        <!--Shoping cart-->
+        <link rel="stylesheet" href="/css/shop.css" type="text/css" />
+        <!--//Shoping cart-->
+        <!--checkout-->
+        <link rel="stylesheet" type="text/css" href="/css/checkout.css">
+        <!--//checkout-->
+        <!--stylesheets-->
+        <link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+        <!--//stylesheets-->
+        <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    </head>
+{% endblock %}
 {% block body %}
-
+    <div class="header-outs" id="home">
     <!-- header -->
-    {{ include('parts/header.html.twig') }}
-
-    <div class="logo_products">
-        <div class="container">
-            <div class="w3ls_logo_products_left">
-                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="special_items">
-                    <li><a href="events.html">Events</a><i>/</i></li>
-                    <li><a href="about.html">About Us</a><i>/</i></li>
-                    <li><a href="products.html">Best Deals</a><i>/</i></li>
-                    <li><a href="services.html">Services</a></li>
-                </ul>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="phone_email">
-                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
+    {% include '/parts/header.html.twig' %}
     <!-- //header -->
-    <!-- products-breadcrumb -->
-    <div class="products-breadcrumb">
-        <div class="container">
-            <ul>
-                <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
-                <li>Checkout</li>
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+    <!-- short -->
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
+                <li><p>Checkout</p></li>
             </ul>
         </div>
     </div>
-    <!-- //products-breadcrumb -->
-    <!-- banner -->
-    <div class="banner">
-        <div class="w3l_banner_nav_left">
-            <nav class="navbar nav_bottom">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                {% include 'parts/category_sidebar.html.twig' %}<!-- /.navbar-collapse -->
-            </nav>
-        </div>
-        <div class="w3l_banner_nav_right">
-            <!-- about -->
-            <div class="privacy about">
-                <div class="checkout-right">
-                    <table class="timetable_sub">
-                        <thead>
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Продукт</th>
-                            <th>Количество</th>
-                            <th>Название</th>
-                            <th>Цена</th>
-                            <th>Общая стоимость</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for order in orders %}
+    <!-- //short-->
+    <!--Checkout-->
+    <!-- //banner -->
+    <!-- top Products -->
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <h3>Order history</h3>
+                    <div class="checkout-right">
+                        <table class="timetable_sub">
+                            <thead>
+                            <tr>
+                                <th>SL No.</th>
+                                <th>Product</th>
+{#                                <th>Quality</th>#}
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Total price</th>
+{#                                <th>Remove</th>#}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
                             {% for orderProduct in order.orderProducts %}
-                                <tr class="rem1" data-productid="{{ orderProduct.product.id }}">
                                     <td class="invert">{{ order.id }}</td>
                                     <td class="invert-image"><a href="{{ path('product_show', {'id': orderProduct.product.id}) }}"><img src="{{ asset( 'uploads/product_images/' ~ orderProduct.product.mainImage) }}" alt=" " class="img-responsive"></a></td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <div class="entry value item-count"><span>{{ orderProduct.total }}</span></div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <td class="invert">{{ orderProduct.product.title }}</td>
-
-                                    <td class="invert">{{ orderProduct.product.getCurrentPrice }} грн</td>
-                                    <td class="invert"><span class="item-total">{{ orderProduct.cost }}</span> грн</td>
+                                    <td class="invert">{{ orderProduct.product.getCurrentPrice }} $</td>
+                                    <td class="invert"><span class="item-total">{{ orderProduct.cost }}</span> $</td>
                                 </tr>
                             {% endfor %}
-                        {% endfor %}
-                        </tbody></table>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
+                <!-- //top products -->
             </div>
-            <!-- //about -->
-        </div>
-        <div class="clearfix"></div>
-    </div>
-{% endblock %}
+    </section>
+    {% block javascripts %}
+        <!--js working-->
+        <script src='/js/jquery-2.2.3.min.js'></script>
+        <!--//js working-->
+        <!-- cart-js -->
+        <script src="/js/minicart.js"></script>
+        {#        <script>#}
+        {#            toys.render();#}
 
-{% block javascripts %}
-    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-    <!--quantity-->
-    <script>
-        $('.value-plus').on('click', function(){
-            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-            divUpd.text(newVal);
-        });
-        $('.value-minus').on('click', function(){
-            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-            if(newVal>=1) divUpd.text(newVal);
-        });
-    </script>
+        {#            toys.cart.on('toys_checkout', function (evt) {#}
+        {#                var items, len, i;#}
 
-    <!-- //js -->
-    <!-- //script-for sticky-nav -->
-    <!-- start-smoth-scrolling -->
-    <script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
-    <script type="text/javascript" src="{{  asset('js/easing.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $(".scroll").click(function(event){
-                event.preventDefault();
-                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        {#                if (this.subtotal() > 0) {#}
+        {#                    items = this.items();#}
+
+        {#                    for (i = 0, len = items.length; i < len; i++) {}#}
+        {#                }#}
+        {#            });#}
+        {#        </script>#}
+        <!--// cart-js -->
+        <!--quantity-->
+        {#        <script>#}
+        {#            $('.value-plus').on('click', function () {#}
+        {#                var divUpd = $(this).parent().find('.value'),#}
+        {#                    newVal = parseInt(divUpd.text(), 10) + 1;#}
+        {#                divUpd.text(newVal);#}
+        {#            });#}
+
+        {#            $('.value-minus').on('click', function () {#}
+        {#                var divUpd = $(this).parent().find('.value'),#}
+        {#                    newVal = parseInt(divUpd.text(), 10) - 1;#}
+        {#                if (newVal >= 1) divUpd.text(newVal);#}
+        {#            });#}
+        {#        </script>#}
+        <!--quantity-->
+        <!--closed-->
+        {#        <script>#}
+        {#            $(document).ready(function (c) {#}
+        {#                $('.close1').on('click', function (c) {#}
+        {#                    $('.rem1').fadeOut('slow', function (c) {#}
+        {#                        $('.rem1').remove();#}
+        {#                    });#}
+        {#                });#}
+        {#            });#}
+        {#        </script>#}
+        <script>
+            $(document).ready(function (c) {
+                $('.close2').on('click', function (c) {
+                    $('.rem2').fadeOut('slow', function (c) {
+                        $('.rem2').remove();
+                    });
+                });
             });
-        });
-    </script>
-    <!-- start-smoth-scrolling -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-                    $(this).toggleClass('open');
-                }
-            );
-        });
-    </script>
-    <!-- here stars scrolling icon -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            /*
+        </script>
+        <script>
+            $(document).ready(function (c) {
+                $('.close3').on('click', function (c) {
+                    $('.rem3').fadeOut('slow', function (c) {
+                        $('.rem3').remove();
+                    });
+                });
+            });
+        </script>
+        <!--//closed-->
+        <!-- start-smoth-scrolling -->
+        <script src="/js/move-top.js"></script>
+        <script src="/js/easing.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({
+                        scrollTop: $(this.hash).offset().top
+                    }, 900);
+                });
+            });
+        </script>
+        <!-- start-smoth-scrolling -->
+        <!-- here stars scrolling icon -->
+        <script>
+            $(document).ready(function () {
+
                 var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
                 };
-            */
-            $().UItoTop({ easingType: 'easeOutQuart' });
-        });
-    </script>
-    <!-- //here ends scrolling icon -->
-    <script src="{{ asset('js/minicart.js') }}"></script>
-    <script src="{{ asset('js/cart.js') }}"></script>
-    <script>
-        paypal.minicart.render();
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });
-    </script>
+                $().UItoTop({
+                    easingType: 'easeOutQuart'
+                });
+
+            });
+        </script>
+        <!-- //here ends scrolling icon -->
+        <!--bootstrap working-->
+        <script src="/js/bootstrap.min.js"></script>
+        <!-- //bootstrap working-->
+        <script src="{{ asset('js/cart.js') }}"></script>
+        <script>
+            let TOKEN = '{{ csrf_token('add_to_cart') }}'
+        </script>
+        <script src="{{ asset('js/vote.js') }}"></script>
+    {% endblock %}
+    {% include 'parts/footer.html.twig' %}
 {% endblock %}

@@ -55,14 +55,14 @@ class Navigation
     public function getTopProducts()
     {
         return $this->productRepo->findBy([
-            'isTop' => true
+            'isTop' => 1
         ]);
     }
 
     public function getSaleProducts()
     {
         return $this->productRepo->findBy([
-            'isOnSale' => true
+            'isOnSale' => 1
         ]);
     }
 

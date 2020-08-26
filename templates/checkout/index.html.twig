@@ -1,257 +1,280 @@
-{% extends 'base.html.twig' %}
+{#{% block title %}Checkout{% endblock %}#}
 
-{% block title %}Hello CheckoutController!{% endblock %}
+{% block stylesheets %}
+    <head>
+        <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+        <!--meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
 
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+        <!--//meta tags ends here-->
+        <!--booststrap-->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+        <!--//booststrap end-->
+        <!-- font-awesome icons -->
+        <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+        <!-- //font-awesome icons -->
+        <!--Shoping cart-->
+        <link rel="stylesheet" href="css/shop.css" type="text/css" />
+        <!--//Shoping cart-->
+        <!--checkout-->
+        <link rel="stylesheet" type="text/css" href="css/checkout.css">
+        <!--//checkout-->
+        <!--stylesheets-->
+        <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
+        <!--//stylesheets-->
+        <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    </head>
+{% endblock %}
 {% block body %}
-
+    <div class="header-outs" id="home">
     <!-- header -->
-    {{ include('parts/header.html.twig') }}
-
-    <div class="logo_products">
-        <div class="container">
-            <div class="w3ls_logo_products_left">
-                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="special_items">
-                    <li><a href="events.html">Events</a><i>/</i></li>
-                    <li><a href="about.html">About Us</a><i>/</i></li>
-                    <li><a href="products.html">Best Deals</a><i>/</i></li>
-                    <li><a href="services.html">Services</a></li>
-                </ul>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="phone_email">
-                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
+    {% include '/parts/header.html.twig' %}
     <!-- //header -->
-    <!-- products-breadcrumb -->
-    <div class="products-breadcrumb">
-        <div class="container">
-            <ul>
-                <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+    <!-- short -->
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a><span> |</span></li>
                 <li>Checkout</li>
             </ul>
         </div>
     </div>
-    <!-- //products-breadcrumb -->
-    <!-- banner -->
-    <div class="banner">
-        <div class="w3l_banner_nav_left">
-            <nav class="navbar nav_bottom">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                {% include 'parts/category_sidebar.html.twig' %}<!-- /.navbar-collapse -->
-            </nav>
-        </div>
-        <div class="w3l_banner_nav_right">
-            <!-- about -->
-            <div class="privacy about">
-                <h3>Товары к оплате</h3>
-                {% if app.request.get('status', 0) %}
-                    <div class="alert alert-success" role="alert">
-                        Ваш Заказ успешно принят
-                    </div>
-                {% endif %}
-                <div class="checkout-right">
-                    <h4>В вашей корзине: <span>{{ cart.count }} элементов</span></h4>
-                    <table class="timetable_sub">
-                        <thead>
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Продукт</th>
-                            <th>Количество</th>
-                            <th>Название</th>
-                            <th>Цена</th>
-                            <th>Общая стоимость</th>
-                            <th>Удалить</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in cart.getItems %}
-                            <tr class="rem1" data-productid="{{ item.product.id }}">
-                                <td class="invert">1</td>
-                                <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.image) }}" alt=" " class="img-responsive"></a></td>
-                                <td class="invert">
-                                    <div class="quantity">
-                                        <div class="quantity-select">
-                                            <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value item-count"><span>{{ item.count }}</span></div>
-                                            <div class="entry value-plus active">&nbsp;</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="invert">{{ item.getTitle }}</td>
-
-                                <td class="invert">{{ item.product.getCurrentPrice }} грн</td>
-                                <td class="invert"><span class="item-total">{{ item.getCost }}</span> грн</td>
-                                <td class="invert">
-                                    <div class="rem">
-                                        <div class="close1" > </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody></table>
-                </div>
-                <div class="checkout-left">
-                    <div class="col-md-4 checkout-left-basket">
-                        <h4><a href="{{ path('index') }}">Вернуться в магазин</a></h4>
-                        <ul>
-                            <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> грн</span></li>
-                        </ul>
-                    </div>
-                    {% if cart.empty %}
-                        <div class="col-md-8 address_form_agile">Ваша корзина пуста</div>
-                    {% else %}
-                        <div class="col-md-8 address_form_agile">
-                            <h4>Детали заказа</h4>
-                            {{ form_start(form, {'attr': {'class': 'creditly-card-form agileinfo_form'}}) }}
-                            <section class="creditly-wrapper wthree, w3_agileits_wrapper">
-                                <div class="information-wrapper">
-                                    <div class="first-row form-group">
-                                        <div class="controls">
-                                            <label class="control-label">Имя: </label>
-                                            {{ form_widget(form.username, {'attr': {'class': 'billing-address-name form-control', 'placeholder': 'Ваше имя'}}) }}
-                                        </div>
-                                        <div class="w3_agileits_card_number_grids">
-                                            <div class="w3_agileits_card_number_grid_left">
-                                                <div class="controls">
-                                                    <label class="control-label">Номер:</label>
-                                                    {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Телефон'}}) }}
-                                                </div>
-                                            </div>
-                                            <div class="clear"> </div>
-                                        </div>
-                                        <div class="controls">
-                                            <label class="control-label">Город </label>
-                                            {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': 'Город'}}) }}
-                                        </div>
-                                        <div class="controls">
-                                            <label class="control-label">Email </label>
-                                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
-                                        </div>
-                                        <div class="controls">
-                                            <label class="control-label">Адрес </label>
-                                            {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Адрес'}}) }}
-                                        </div>
-                                        {{ form_row(form._token) }}
-                                    </div>
-                                    <button class="submit check_out">Оплатить</button>
-                                </div>
-                            </section>
-                            {{ form_end(form) }}
+    <!-- //short-->
+    <!--Checkout-->
+    <!-- //banner -->
+    <!-- top Products -->
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <h3>Chec<span>kout</span></h3>
+                    {% if app.request.get('status', 0) %}
+                        <div class="alert alert-success" role="alert">
+                            Order was successfully accepted
                         </div>
                     {% endif %}
+                    <div class="checkout-right">
+                        <h4>Your shopping cart : <span>{{ cart.count }} Products</span></h4>
+                        <table class="timetable_sub">
+                            <thead>
+                            <tr>
+                                <th>SL No.</th>
+                                <th>Product</th>
+                                <th>Quality</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Total price</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart.getItems %}
+                                <tr class="rem1" data-productid="{{ item.product.id }}">
+                                    <td class="invert">{{ item.product.id }}</td>
+                                    <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.mainImage) }}" alt=" " class="img-responsive"></a></td>
+                                    <td class="invert">
+                                        <div class="quantity">
+                                            <div class="quantity-select">
+                                                <div class="entry value-minus">&nbsp;</div>
+                                                <div class="entry value item-count"><span>{{ item.count }}</span></div>
+                                                <div class="entry value-plus active">&nbsp;</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="invert">{{ item.getTitle }}</td>
+                                    <td class="invert">{{ item.product.getCurrentPrice }} $</td>
+                                    <td class="invert"><span class="item-total">{{ item.getCost }}</span> $</td>
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <div class="close1" > </div>
+                                        </div>
 
-                    <div class="clearfix"> </div>
-
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="checkout-left">
+                        <div class="col-md-4 checkout-left-basket">
+                            <h4><a href="{{ path('index') }}">Go back</a></h4>
+                            <ul>
+                                <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> $</span></li>
+                            </ul>
+                        </div>
+                        {% if cart.empty %}
+                        <div class="col-md-8 address_form_agile">Your cart is empty</div>
+                        {% else %}
+                        <div class="col-md-8 address_form_agile">
+                            <div class="col-md-8 address_form">
+                                <h4>Add a new Details</h4>
+                                {{ form_start(form, {'attr': {'class': 'creditly-card-form agileinfo_form'}}) }}
+                                <section class="creditly-wrapper wrapper">
+                                    <div class="information-wrapper">
+                                        <div class="first-row form-group">
+                                            <div class="controls">
+                                                <label class="control-label">Full name: </label>
+                                                {{ form_widget(form.username, {'attr': {'class': 'billing-address-name form-control', 'placeholder': 'Yout full name'}}) }}
+                                            </div>
+                                            <div class="w3_agileits_card_number_grids">
+                                                <div class="w3_agileits_card_number_grid_left">
+                                                    <div class="controls">
+                                                        <label class="control-label">Mobile number: </label>
+                                                        {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Mobile number: '}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="clear"> </div>
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">City </label>
+                                                {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': 'City'}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Email </label>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Address </label>
+                                                {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Address'}}) }}
+                                            </div>
+                                            {{ form_row(form._token) }}
+                                        </div>
+                                        <button class="submit check_out">Delivery to this Address</button>
+                                    </div>
+                                </section>
+                                {{ form_end(form) }}
+                                {#                        </form>#}
+                                {#                        <div class="checkout-right-basket">#}
+                                {#                            <a href="payment.html">Make a Payment </a>#}
+                                {#                        </div>#}
+                            </div>
+                            {% endif %}
+                            <div class="clearfix"> </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-
+                <!-- //top products -->
             </div>
-            <!-- //about -->
-        </div>
-        <div class="clearfix"></div>
-    </div>
-{% endblock %}
+    </section>
+    {% include 'parts/footer.html.twig' %}
+    {% block javascripts %}
+        <!--js working-->
+        <script src='js/jquery-2.2.3.min.js'></script>
+        <!--//js working-->
+        <!-- cart-js -->
+        <script src="js/minicart.js"></script>
+{#        <script>#}
+{#            toys.render();#}
 
-{% block javascripts %}
-    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-    <!--quantity-->
-    <script>
-        $('.value-plus').on('click', function(){
-            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-            divUpd.text(newVal);
-        });
+{#            toys.cart.on('toys_checkout', function (evt) {#}
+{#                var items, len, i;#}
 
-        $('.value-minus').on('click', function(){
-            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-            if(newVal>=1) divUpd.text(newVal);
-        });
-    </script>
+{#                if (this.subtotal() > 0) {#}
+{#                    items = this.items();#}
 
-    <!-- //js -->
-    <!-- //script-for sticky-nav -->
-    <!-- start-smoth-scrolling -->
-    <script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
-    <script type="text/javascript" src="{{  asset('js/easing.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $(".scroll").click(function(event){
-                event.preventDefault();
-                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+{#                    for (i = 0, len = items.length; i < len; i++) {}#}
+{#                }#}
+{#            });#}
+{#        </script>#}
+        <!--// cart-js -->
+        <!--quantity-->
+{#        <script>#}
+{#            $('.value-plus').on('click', function () {#}
+{#                var divUpd = $(this).parent().find('.value'),#}
+{#                    newVal = parseInt(divUpd.text(), 10) + 1;#}
+{#                divUpd.text(newVal);#}
+{#            });#}
+
+{#            $('.value-minus').on('click', function () {#}
+{#                var divUpd = $(this).parent().find('.value'),#}
+{#                    newVal = parseInt(divUpd.text(), 10) - 1;#}
+{#                if (newVal >= 1) divUpd.text(newVal);#}
+{#            });#}
+{#        </script>#}
+        <!--quantity-->
+        <!--closed-->
+{#        <script>#}
+{#            $(document).ready(function (c) {#}
+{#                $('.close1').on('click', function (c) {#}
+{#                    $('.rem1').fadeOut('slow', function (c) {#}
+{#                        $('.rem1').remove();#}
+{#                    });#}
+{#                });#}
+{#            });#}
+{#        </script>#}
+        <script>
+            $(document).ready(function (c) {
+                $('.close2').on('click', function (c) {
+                    $('.rem2').fadeOut('slow', function (c) {
+                        $('.rem2').remove();
+                    });
+                });
             });
-        });
-    </script>
-    <!-- start-smoth-scrolling -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-                    $(this).toggleClass('open');
-                }
-            );
-        });
-    </script>
-    <!-- here stars scrolling icon -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            /*
+        </script>
+        <script>
+            $(document).ready(function (c) {
+                $('.close3').on('click', function (c) {
+                    $('.rem3').fadeOut('slow', function (c) {
+                        $('.rem3').remove();
+                    });
+                });
+            });
+        </script>
+        <!--//closed-->
+        <!-- start-smoth-scrolling -->
+        <script src="js/move-top.js"></script>
+        <script src="js/easing.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({
+                        scrollTop: $(this.hash).offset().top
+                    }, 900);
+                });
+            });
+        </script>
+        <!-- start-smoth-scrolling -->
+        <!-- here stars scrolling icon -->
+        <script>
+            $(document).ready(function () {
+
                 var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
                 };
-            */
+                $().UItoTop({
+                    easingType: 'easeOutQuart'
+                });
 
-            $().UItoTop({ easingType: 'easeOutQuart' });
-
-        });
-    </script>
-    <!-- //here ends scrolling icon -->
-    <script src="{{ asset('js/minicart.js') }}"></script>
-    <script src="{{ asset('js/cart.js') }}"></script>
-    <script>
-        paypal.minicart.render();
-
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });
-
-    </script>
+            });
+        </script>
+        <!-- //here ends scrolling icon -->
+        <!--bootstrap working-->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- //bootstrap working-->
+        <script src="{{ asset('js/cart.js') }}"></script>
+        <script>
+            let TOKEN = '{{ csrf_token('add_to_cart') }}'
+        </script>
+        <script src="{{ asset('js/vote.js') }}"></script>
+    {% endblock %}
 {% endblock %}

@@ -1,5 +1,5 @@
 $(function() {
-    $('.add_to_cart').on(
+    $('.toys-cart').on(
         'click',
         function(event) {
             let productId = $(this).data('productid');

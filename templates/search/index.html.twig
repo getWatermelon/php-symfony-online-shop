@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+    <body>
+    <!--header-->
+    <div class="header-outs" id="home">
+        {% include 'parts/header.html.twig' %}
+    </div>
+    <!--//header-->
+    <!-- banner -->
+    <div class="inner_page-banner one-img">
+    </div>
+    <!--//banner -->
+    <!-- short -->
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="{{ '/' }}">Home</a></li>
+{#                {% if category.parent is not empty %}#}
+{#                    <li><a href="{{ path('category_index', {'id': category.parent.id}) }}">{{ category.parent.title }}</a><span> |</span></li>#}
+{#                    <li>{{ category.title }}</li>#}
+{#                {% else %}#}
+{#                    <li>{{ category.title }}</li>#}
+{#                {% endif %}#}
+            </ul>
+        </div>
+    </div>
+    <!-- //short-->
+    <!--show Now-->
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+{#            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">{{ category.title }}</h3>#}
+            <div class="row">
+                <div class="side-bar col-lg-3">
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Search Here..</h3>
+                        <form class="form-inline my-lg-0" action="{{ path('search_products') }}">
+                            <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search">
+                            <button class="btn" type="submit">Search</button>
+                        </form>
+                    </div>
+
+                    <h3 class="agileits-sear-head">Other categories</h3>
+                    <ul>
+                        {% for cat in navigation.getMenu %}
+                            <li>
+                                <div class="dropdown">
+                                    <form action="{{ path('category_index', {'id': cat.id}) }}" target="_blank">
+                                        <button class="dropbtn">{{ cat.title }}</button>
+                                    </form>
+                                    <div class="dropdown-content">
+                                        {% for subcat in cat.categories %}
+                                            <a href="{{ path('category_index', {'id': subcat.id}) }}">{{ subcat.title }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="deal-leftmk left-side">
+                        <h3 class="agileits-sear-head">Recently viewed</h3>
+                        {% for product in navigation.historyProducts %}
+                            <div class="row special-sec1">
+                                <div class="col-xs-4 img-deals">
+                                    <img href="{{ path('product_show', {'id': product.id}) }}" src="{{ asset('/uploads/product_images/' ~ product.mainImage) }}" alt="" class="img-fluid" style="width: 100px">
+                                </div>
+                                <div class="col-xs-8 img-deal1">
+                                    <h3>{{ product.title }}</h3>
+                                    {% if product.isOnSale == 1  %}
+                                        <a href="{{ path('product_show', {'id': product.id}) }}">
+                                            <p>
+                                                <span class="money ">${{ product.currentPrice }}</span>
+                                                <del>{{ product.currentSalePrice }}</del>
+                                            </p>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('product_show', {'id': product.id}) }}">
+                                            <p>
+                                                <span class="money ">${{ product.currentPrice }}</span>
+                                            </p>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="left-ads-display col-lg-9">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                                <div class="product-toys-info">
+                                    <div class="men-pro-item">
+                                        <div class="men-thumb-item">
+                                                                                    <div class="pictuse" style="height: 400px; align-content: center">
+                                            <img src="{{ asset('uploads/product_images/' ~ product.mainImage) }}" class="img-thumbnail img-fluid" alt="">
+                                                                                    </div>
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="{{ path('product_show', {'id': product.id}) }}" class="link-product-add-cart">Quick View</a>
+                                                </div>
+                                            </div>
+                                            {% if product.isTop %}
+                                                <span class="product-new-top">Top product</span>
+                                            {% elseif product.isOnSale %}
+                                                <span class="product-new-top">Hot offer</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item-info-product">
+                                            <div class="info-product-price">
+                                                <div class="grid_meta">
+                                                    <div class="product_price">
+                                                        <h4>
+                                                            <a href="{{ path('product_show', {'id': product.id}) }}">{{ product.title }}</a>
+                                                        </h4>
+                                                        <div class="grid-price mt-2">
+                                                            {% if product.isOnSale == 1  %}
+                                                                <p>
+                                                                    <span class="money ">${{ product.currentPrice }}</span>
+                                                                    <del>{{ product.currentSalePrice }}</del>
+                                                                </p>
+                                                            {% else %}
+                                                                <p>
+                                                                    <span class="money ">${{ product.currentPrice }}</span>
+                                                                </p>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <ul class="stars">
+                                                        {% for i in 1..product.currentRating %}
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="fas fa-star"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <div class="toys single-item hvr-outline-out">
+                                                    <form action="#" method="post">
+                                                        <input type="hidden" name="cmd" value="_cart">
+                                                        <input type="hidden" name="add" value="1">
+                                                        <input type="hidden" name="toys_item" value="toys(barbie)">
+                                                        <input type="hidden" name="amount" value="575.00">
+                                                        <button type="submit" data-productid="{{ product.id }}" value="Add to cart" class="toys-cart ptoys-cart">
+                                                            <i class="fas fa-cart-plus"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //show Now-->
+    {% include '/parts/footer.html.twig' %}
+    </body>
+{% endblock %}
+
+
