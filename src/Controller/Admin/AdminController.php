@@ -3,12 +3,16 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class AdminController
+ * @package App\Controller\Admin
+ */
 class AdminController extends AbstractController
 {
+
     /**
-     * @Route("/admin/", name="admin_index")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {

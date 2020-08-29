@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class CheckoutController
@@ -36,7 +35,7 @@ class CheckoutController extends AbstractController
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if($cart->isEmpty()) {
+            if ($cart->isEmpty()) {
                 throw new BadRequestException('You are not allowed to do this action');
             }
             $order->setStatus(0);

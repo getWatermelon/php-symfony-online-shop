@@ -40,16 +40,26 @@ class OrderProduct
     private $cost;
 
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product|null $product
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -57,11 +67,18 @@ class OrderProduct
         return $this;
     }
 
+    /**
+     * @return Order|null
+     */
     public function getLinkedOrder(): ?Order
     {
         return $this->linkedOrder;
     }
 
+    /**
+     * @param Order|null $linkedOrder
+     * @return $this
+     */
     public function setLinkedOrder(?Order $linkedOrder): self
     {
         $this->linkedOrder = $linkedOrder;
@@ -69,11 +86,18 @@ class OrderProduct
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getTotal(): ?int
     {
         return $this->total;
     }
 
+    /**
+     * @param string $total
+     * @return $this
+     */
     public function setTotal(string $total): self
     {
         $this->total = $total;
@@ -81,11 +105,18 @@ class OrderProduct
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCost(): ?string
     {
         return $this->cost;
     }
 
+    /**
+     * @param int $cost
+     * @return $this
+     */
     public function setCost(int $cost): self
     {
         $this->cost = $cost;

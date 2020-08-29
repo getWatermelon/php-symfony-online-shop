@@ -7,21 +7,22 @@ use App\Form\UserProfileType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\Upload\ImageUploader;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 /**
- * @Route("/")
+ * Class UserController
+ * @package App\Controller\Admin
  */
 class UserController extends AbstractController
 {
+
     /**
-     * @Route("admin/user/", name="user_index", methods={"GET"})
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -30,8 +31,10 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("admin/user/new", name="user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -53,8 +56,10 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("admin/user/{id}", name="user_show", methods={"GET"})
+     * @param User $user
+     * @return Response
      */
     public function show(User $user): Response
     {
@@ -63,8 +68,12 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("admin/user/edit/{id}", name="user_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param User $user
+     * @param SluggerInterface $slugger
+     * @return Response
      */
     public function edit(Request $request, User $user, SluggerInterface $slugger): Response
     {
@@ -74,7 +83,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $imageFile = $form->get('image')->getData();
-            if($imageFile) {
+            if ($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
                 $user->setImage($imageName);
             }
@@ -92,12 +101,15 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("admin/user/profile/{id}/edit", name="profile_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param User $user
+     * @param SluggerInterface $slugger
+     * @return Response
      */
     public function showProfile(Request $request, User $user, SluggerInterface $slugger): Response
     {
-//        $user = $this->getUser();
 
         $form = $this->createForm(UserProfileType::class, $user);
         $form->handleRequest($request);
@@ -105,7 +117,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $imageFile = $form->get('image')->getData();
-            if($imageFile) {
+            if ($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
                 $user->setImage($imageName);
             }
@@ -122,15 +134,17 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
 
-//        return $this->edit($request, $this->getUser());
     }
 
+
     /**
-     * @Route("admin/user/{id}", name="user_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param User $user
+     * @return Response
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();

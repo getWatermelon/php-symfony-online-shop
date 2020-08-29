@@ -30,11 +30,11 @@
     {% endfor %}
 
     <div class="container py-xl-5 py-sm-3">
-    <!-- forms -->
-    <section class="typo-section py-4 border-top border-bottom">
-        <h3 class="typo-main-heading mb-lg-4 mb-3 pr-3 pb-1">Register</h3>
-        <!-- form1 -->
-        {{ form_start(registrationForm) }}
+        <!-- forms -->
+        <section class="typo-section py-4 border-top border-bottom">
+            <h3 class="typo-main-heading mb-lg-4 mb-3 pr-3 pb-1">Register</h3>
+            <!-- form1 -->
+            {{ form_start(registrationForm) }}
             <div class="form-row">
                 <div class="form-group col-md-6">
                     {{ form_row(registrationForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Your Userame'}}) }}
@@ -50,28 +50,14 @@
                 {{ form_row(registrationForm.image) }}
             </div>
             <div class="form-group">
-                    {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
-        {{ form_end(registrationForm) }}
-        <!--// form1 -->
-    </section>
-    <!--// forms -->
+            {{ form_end(registrationForm) }}
+            <!--// form1 -->
+        </section>
+        <!--// forms -->
     </div>
-
-{#    {{ form_widget(form.username, {'attr': {'class': 'billing-address-name form-control', 'placeholder': 'Yout full name'}}) }}#}
-
-{#    {{ form_start(registrationForm) }}#}
-{#        {{ form_row(registrationForm.name) }}#}
-{#        {{ form_row(registrationForm.email) }}#}
-{#        {{ form_row(registrationForm.image) }}#}
-{#        {{ form_row(registrationForm.plainPassword, {#}
-{#            label: 'Password'#}
-{#        }) }}#}
-{#        {{ form_row(registrationForm.agreeTerms) }}#}
-
-{#        <button type="submit" class="btn">Register</button>#}
-{#    {{ form_end(registrationForm) }}#}
     {% include 'parts/footer.html.twig' %}
 {% endblock %}
 

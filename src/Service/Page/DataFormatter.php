@@ -36,8 +36,8 @@ class DataFormatter extends AbstractExtension
         $currentDate = new \DateTime();
         $diff = ($currentDate->getTimestamp() - $date->getTimestamp()) / 60;
         if ($diff < 60) {
-            return sprintf("%d минут назад", (int) $diff);
+            return sprintf("%d минут назад", (int)$diff);
         }
-        return  $date->format('Y/m/d H:i:s');
+        return $date->format('Y/m/d H:i:s');
     }
 }

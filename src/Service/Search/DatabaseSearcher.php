@@ -34,10 +34,10 @@ class DatabaseSearcher implements SearcherInterface
      * @param string $query
      * @return int|mixed|string
      */
-    public function searchByQuery(string $query) : array
+    public function searchByQuery(string $query): array
     {
         $qb = $this->em->createQueryBuilder();
-        $result = $qb->from(Product::class,'a')
+        $result = $qb->from(Product::class, 'a')
             ->select('a')
             ->where($qb->expr()->like(
                 'a.title',

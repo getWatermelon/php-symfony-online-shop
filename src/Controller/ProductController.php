@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProductController
@@ -32,14 +31,14 @@ class ProductController extends AbstractController
 //        $session->clear();
         $session->start();
         $products = $session->has('history') ? $session->get('history') : [];
-        if(empty($products[$product->getId()])) {
+        if (empty($products[$product->getId()])) {
             $products[$product->getId()] = $product->getId();
         }
         $session->set('history', $products);
 
         $form = $this->createForm(CommentType::class, new Comment());
         return $this->render('product/index.html.twig', [
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
             'product' => $product,
         ]);
     }
@@ -57,8 +56,8 @@ class ProductController extends AbstractController
         if (!$this->isCsrfTokenValid('add_to_cart', $token)) {
             throw new BadRequestException('Wrong CSRF token. Are you robot?');
         }
-        foreach ($this->getUser()->getRatings() as &$rating){
-            if ($rating->getProduct() == $product){
+        foreach ($this->getUser()->getRatings() as &$rating) {
+            if ($rating->getProduct() == $product) {
                 $this->getUser()->removeRating($rating);
             }
         }
@@ -72,6 +71,11 @@ class ProductController extends AbstractController
         return new Response($product->getCurrentRating());
     }
 
+    /**
+     * @param Product $product
+     * @param SessionInterface $session
+     * @return Response
+     */
     public function addToCart(Product $product, SessionInterface $session)
     {
         $session->start();
@@ -86,6 +90,10 @@ class ProductController extends AbstractController
         return new Response();
     }
 
+    /**
+     * @param Cart $cart
+     * @return Response
+     */
     public function showCart(Cart $cart)
     {
         return $this->render('parts/cart_modal.html.twig', [
@@ -94,12 +102,23 @@ class ProductController extends AbstractController
     }
 
 
+    /**
+     * @param Product $product
+     * @param Cart $cart
+     * @return Response
+     */
     public function removeFromCart(Product $product, Cart $cart)
     {
         $cart->removeItemByProduct($product);
         return new Response($cart->getTotal());
     }
 
+    /**
+     * @param Product $product
+     * @param Cart $cart
+     * @param Request $request
+     * @return Response
+     */
     public function updateItemCount(Product $product, Cart $cart, Request $request)
     {
         $count = $request->request->get('count');

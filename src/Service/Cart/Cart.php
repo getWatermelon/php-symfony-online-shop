@@ -53,7 +53,7 @@ class Cart implements \Countable
         if ($this->session->has('order')) {
             $products = $this->getProductsList();
             foreach ($products as $product) {
-                yield new Item($product, (int) $this->session->get('order')[$product->getId()]);
+                yield new Item($product, (int)$this->session->get('order')[$product->getId()]);
             }
         }
     }
@@ -69,7 +69,7 @@ class Cart implements \Countable
     /**
      * @return array
      */
-    private function getProductsList() : array
+    private function getProductsList(): array
     {
         if (!$this->session->has('order')) {
             return [];

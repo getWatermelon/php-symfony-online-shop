@@ -43,26 +43,42 @@ class Price
      */
     private $createdAt;
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->value;
     }
 
+    /**
+     *
+     */
     public function __constract()
     {
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getValue(): ?string
     {
         return $this->value;
     }
 
+    /**
+     * @param string|null $value
+     * @return $this
+     */
     public function setValue(?string $value): self
     {
         $this->value = $value;
@@ -70,11 +86,18 @@ class Price
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product|null $product
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -82,11 +105,18 @@ class Price
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsCurrent(): ?bool
     {
         return $this->isCurrent;
     }
 
+    /**
+     * @param bool|null $isCurrent
+     * @return $this
+     */
     public function setIsCurrent(?bool $isCurrent): self
     {
         $this->isCurrent = $isCurrent;
@@ -94,11 +124,18 @@ class Price
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsSale(): ?bool
     {
         return $this->isSale;
     }
 
+    /**
+     * @param bool $isSale
+     * @return $this
+     */
     public function setIsSale(bool $isSale): self
     {
         $this->isSale = $isSale;
@@ -106,11 +143,18 @@ class Price
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTimeInterface $createdAt
+     * @return $this
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;

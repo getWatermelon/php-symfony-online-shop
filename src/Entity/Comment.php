@@ -57,6 +57,9 @@ class Comment
     private $updatedAt;
 
 
+    /**
+     * Comment constructor.
+     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -64,16 +67,26 @@ class Comment
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
+    /**
+     * @param string $body
+     * @return $this
+     */
     public function setBody(string $body): self
     {
         $this->body = $body;
@@ -81,11 +94,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product|null $product
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -93,11 +113,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -105,11 +132,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getReplyTo(): ?self
     {
         return $this->replyTo;
     }
 
+    /**
+     * @param Comment|null $replyTo
+     * @return $this
+     */
     public function setReplyTo(?self $replyTo): self
     {
         $this->replyTo = $replyTo;
@@ -126,6 +160,10 @@ class Comment
         return $this->comments;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function addComment(self $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -136,6 +174,10 @@ class Comment
         return $this;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function removeComment(self $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -149,11 +191,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTimeInterface $createdAt
+     * @return $this
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -161,11 +210,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @param \DateTimeInterface $updatedAt
+     * @return $this
+     */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

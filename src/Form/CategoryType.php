@@ -16,8 +16,7 @@ class CategoryType extends AbstractType
             ->add('title')
             ->add('image', FileType::class, ['mapped' => false, 'required' => false, 'data_class' => null])
             ->add('products')
-            ->add('parent')
-        ;
+            ->add('parent');
     }
 
     public function configureOptions(OptionsResolver $resolver)

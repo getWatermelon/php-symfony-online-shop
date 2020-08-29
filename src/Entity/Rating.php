@@ -34,16 +34,26 @@ class Rating
      */
     private $user;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getValue(): ?int
     {
         return $this->value;
     }
 
+    /**
+     * @param int|null $value
+     * @return $this
+     */
     public function setValue(?int $value): self
     {
         $this->value = $value;
@@ -51,11 +61,18 @@ class Rating
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product|null $product
+     * @return $this
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -63,11 +80,18 @@ class Rating
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;

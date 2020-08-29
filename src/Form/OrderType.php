@@ -16,8 +16,7 @@ class OrderType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('city')
-            ->add('address')
-        ;
+            ->add('address');
     }
 
     public function configureOptions(OptionsResolver $resolver)

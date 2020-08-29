@@ -10,12 +10,31 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
+/**
+ * Class EmailVerifier
+ * @package App\Security
+ */
 class EmailVerifier
 {
+    /**
+     * @var VerifyEmailHelperInterface
+     */
     private $verifyEmailHelper;
+    /**
+     * @var MailerInterface
+     */
     private $mailer;
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * EmailVerifier constructor.
+     * @param VerifyEmailHelperInterface $helper
+     * @param MailerInterface $mailer
+     * @param EntityManagerInterface $manager
+     */
     public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, EntityManagerInterface $manager)
     {
         $this->verifyEmailHelper = $helper;
@@ -23,6 +42,12 @@ class EmailVerifier
         $this->entityManager = $manager;
     }
 
+    /**
+     * @param string $verifyEmailRouteName
+     * @param UserInterface $user
+     * @param TemplatedEmail $email
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(

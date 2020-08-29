@@ -10,15 +10,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
- * @Route("/comment")
+ * Class CommentController
+ * @package App\Controller
  */
 class CommentController extends AbstractController
 {
 
 
+    /**
+     * @param Request $request
+     * @param Product $product
+     * @return Response
+     */
     public function newComment(Request $request, Product $product): Response
     {
         $comment = new Comment();
@@ -44,7 +50,6 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/reply/{id}/{commentId}", name="add_comment_reply", methods={"POST"})
      * @ParamConverter("comment", options={"id" = "commentId"})
      */
     public function addCommentReply(Request $request, Product $product, Comment $comment): Response

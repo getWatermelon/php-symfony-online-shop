@@ -7,34 +7,30 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-{#            <tr>#}
-{#                <th>Password</th>#}
-{#                <td>{{ user.password }}</td>#}
-{#            </tr>#}
-            <tr>
-                <th>IsVerified</th>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img src="{{ asset('uploads/user_images/' ~ user.image) }}" style="width: 150px"></td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+        </tr>
+        <tr>
+            <th>IsVerified</th>
+            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><img src="{{ asset('uploads/user_images/' ~ user.image) }}" style="width: 150px"></td>
+        </tr>
         </tbody>
     </table>
 

@@ -3,148 +3,126 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<body>
-<div class="header-outs" id="home">
-    <!-- header -->
-    {% include '/parts/header.html.twig' %}
-    <!-- //header -->
-    <!-- Slideshow 4 -->
-    <div class="slider text-center">
-        <div class="callbacks_container">
-            <ul class="rslides" id="slider4">
-                <li>
-                    <div class="slider-img one-img">
-                        <div class="container">
-                            <div class="slider-info ">
-                                <h5>Best motherboard for your PC</h5>
-                                <div class="outs_more-buttn">
-                                    <a href="#">Read More</a>
+    <body>
+    <div class="header-outs" id="home">
+        <!-- header -->
+        {% include '/parts/header.html.twig' %}
+        <!-- //header -->
+        <!-- Slideshow 4 -->
+        <div class="slider text-center">
+            <div class="callbacks_container">
+                <ul class="rslides" id="slider4">
+                    <li>
+                        <div class="slider-img one-img">
+                            <div class="container">
+                                <div class="slider-info ">
+                                    <h5>Best motherboard for your PC</h5>
+                                    <div class="outs_more-buttn">
+                                        <a href="#">Read More</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="slider-img two-img">
-                        <div class="container">
-                            <div class="slider-info ">
-                                <h5>The fastest processor for games</h5>
-                                <div class="outs_more-buttn">
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="slider-img three-img">
-                        <div class="container">
-                            <div class="slider-info">
-                                <h5>Advanced cooling system</h5>
-                                <div class="outs_more-buttn">
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <!-- This is here just to demonstrate the callbacks -->
-        <!-- <ul class="events">
-           <li>Example 4 callback events</li>
-           </ul>-->
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- //banner -->
-<!-- about -->
-<section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about" style="background-color: #9697e7">
-    <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
-        <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">Top products</h3>
-        {% for product in navigation.topProducts %}
-        <div class="row banner-below-w3l">
-            <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
-                <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" class="img-thumbnail" alt="">
-                <div class="banner-right-icon">
-                    <h4 class="pt-3">{{ product.title }}</h4>
-                    <div class="outs_more-buttn">
-                        {% if  product.isOnSale == 1 %}
-                            <p>
-                                <span class="item_price">{{ product.currentPrice }} $</span>
-                                <del>{{ product.currentSalePrice }} $</del>
-                            </p>
-                        {% else %}
-                            <p>
-                                <span class="item_price">{{ product.currentPrice }} $</span>
-                            </p>
-                        {% endif %}
-                        <a href="{{ path('product_show', {'id': product.id}) }}">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-<!-- //about -->
-<!--new Arrivals -->
-{#<section class="blog py-lg-4 py-md-3 py-sm-3 py-3">#}
-{#    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">#}
-{#        <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3" style="color: #0c0c0c">Top products</h3>#}
-{#        <div class="slid-img">#}
-{#            <ul id="flexiselDemo1" style="margin-left: 50px">#}
-{#                    {% for product in navigation.topProducts %}#}
-{#                        <li style="margin-left: 50px">#}
-{#                            <div class="agileinfo_port_grid">#}
-{#                                <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" alt=" " class="img-fluid" />#}
-{#                                <div class="banner-right-icon">#}
-{#                                    <h4 class="pt-3">{{ product.title }}</h4>#}
-{#                                </div>#}
-{#                                <div class="outs_more-buttn">#}
-{#                                    <a href="{{ path('product_show', {'id': product.id}) }}">Shop Now</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#</section>#}
-
-<section class="blog py-lg-4 py-md-3 py-sm-3 py-3">
-    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-        <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3" style="color: #0c0c0c">Hot offers</h3>
-        <div class="slid-img">
-            <ul id="flexiselDemo1" style="margin-left: 50px">
-                {% for product in navigation.saleProducts %}
-                    <li style="margin-left: 50px">
-                        <div class="agileinfo_port_grid">
-                            <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" alt=" " class="img-fluid" />
-                            <div class="banner-right-icon">
-                                <h4 class="pt-3">{{ product.title }}</h4>
-                                {% if  product.isOnSale == 1 %}
-                                    <p>
-                                        <span class="item_price">{{ product.currentPrice }} $</span>
-                                        <del>{{ product.currentSalePrice }} $</del>
-                                    </p>
-                                {% else %}
-                                    <p>
-                                        <span class="item_price">{{ product.currentPrice }} $</span>
-                                    </p>
-                                {% endif %}
-                            </div>
-                            <div class="outs_more-buttn">
-                                <a href="{{ path('product_show', {'id': product.id}) }}">Shop Now</a>
                             </div>
                         </div>
                     </li>
-                {% endfor %}
-            </ul>
+                    <li>
+                        <div class="slider-img two-img">
+                            <div class="container">
+                                <div class="slider-info ">
+                                    <h5>The fastest processor for games</h5>
+                                    <div class="outs_more-buttn">
+                                        <a href="#">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="slider-img three-img">
+                            <div class="container">
+                                <div class="slider-info">
+                                    <h5>Advanced cooling system</h5>
+                                    <div class="outs_more-buttn">
+                                        <a href="#">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- This is here just to demonstrate the callbacks -->
+            <!-- <ul class="events">
+               <li>Example 4 callback events</li>
+               </ul>-->
+            <div class="clearfix"></div>
         </div>
     </div>
-</section>
-<!--//Product-about-->
-{% include '/parts/footer.html.twig' %}
-</body>
+    <!-- //banner -->
+    <!-- about -->
+    <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about" style="background-color: #9697e7">
+        <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
+            <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">Top products</h3>
+            {% for product in navigation.topProducts %}
+            <div class="row banner-below-w3l">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
+                    <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" class="img-thumbnail" alt="">
+                    <div class="banner-right-icon">
+                        <h4 class="pt-3">{{ product.title }}</h4>
+                        <div class="outs_more-buttn">
+                            {% if  product.isOnSale == 1 %}
+                                <p>
+                                    <span class="item_price">{{ product.currentPrice }} $</span>
+                                    <del>{{ product.currentSalePrice }} $</del>
+                                </p>
+                            {% else %}
+                                <p>
+                                    <span class="item_price">{{ product.currentPrice }} $</span>
+                                </p>
+                            {% endif %}
+                            <a href="{{ path('product_show', {'id': product.id}) }}">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- //about -->
+
+    <section class="blog py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3" style="color: #0c0c0c">Hot offers</h3>
+            <div class="slid-img">
+                <ul id="flexiselDemo1" style="margin-left: 50px">
+                    {% for product in navigation.saleProducts %}
+                        <li style="margin-left: 50px">
+                            <div class="agileinfo_port_grid">
+                                <img src="{{ asset('uploads/product_images/') ~ product.mainImage }}" alt=" "
+                                     class="img-fluid"/>
+                                <div class="banner-right-icon">
+                                    <h4 class="pt-3">{{ product.title }}</h4>
+                                    {% if  product.isOnSale == 1 %}
+                                        <p>
+                                            <span class="item_price">{{ product.currentPrice }} $</span>
+                                            <del>{{ product.currentSalePrice }} $</del>
+                                        </p>
+                                    {% else %}
+                                        <p>
+                                            <span class="item_price">{{ product.currentPrice }} $</span>
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                <div class="outs_more-buttn">
+                                    <a href="{{ path('product_show', {'id': product.id}) }}">Shop Now</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--//Product-about-->
+    {% include '/parts/footer.html.twig' %}
+    </body>
 {% endblock %}

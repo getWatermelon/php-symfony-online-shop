@@ -1,4 +1,4 @@
-{#{% block title %}Checkout{% endblock %}#}
+{# {% block title %}Checkout{% endblock %} #}
 
 {% block stylesheets %}
     <head>
@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
         <script>
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
@@ -25,7 +25,7 @@
         <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
         <!-- //font-awesome icons -->
         <!--Shoping cart-->
-        <link rel="stylesheet" href="/css/shop.css" type="text/css" />
+        <link rel="stylesheet" href="/css/shop.css" type="text/css"/>
         <!--//Shoping cart-->
         <!--checkout-->
         <link rel="stylesheet" type="text/css" href="/css/checkout.css">
@@ -69,23 +69,24 @@
                             <tr>
                                 <th>SL No.</th>
                                 <th>Product</th>
-{#                                <th>Quality</th>#}
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Total price</th>
-{#                                <th>Remove</th>#}
                             </tr>
                             </thead>
                             <tbody>
                             {% for order in orders %}
-                            {% for orderProduct in order.orderProducts %}
+                                {% for orderProduct in order.orderProducts %}
                                     <td class="invert">{{ order.id }}</td>
-                                    <td class="invert-image"><a href="{{ path('product_show', {'id': orderProduct.product.id}) }}"><img src="{{ asset( 'uploads/product_images/' ~ orderProduct.product.mainImage) }}" alt=" " class="img-responsive"></a></td>
+                                    <td class="invert-image"><a
+                                                href="{{ path('product_show', {'id': orderProduct.product.id}) }}"><img
+                                                    src="{{ asset( 'uploads/product_images/' ~ orderProduct.product.mainImage) }}"
+                                                    alt=" " class="img-responsive"></a></td>
                                     <td class="invert">{{ orderProduct.product.title }}</td>
                                     <td class="invert">{{ orderProduct.product.getCurrentPrice }} $</td>
                                     <td class="invert"><span class="item-total">{{ orderProduct.cost }}</span> $</td>
-                                </tr>
-                            {% endfor %}
+                                    </tr>
+                                {% endfor %}
                             {% endfor %}
                             </tbody>
                         </table>
@@ -100,45 +101,6 @@
         <!--//js working-->
         <!-- cart-js -->
         <script src="/js/minicart.js"></script>
-        {#        <script>#}
-        {#            toys.render();#}
-
-        {#            toys.cart.on('toys_checkout', function (evt) {#}
-        {#                var items, len, i;#}
-
-        {#                if (this.subtotal() > 0) {#}
-        {#                    items = this.items();#}
-
-        {#                    for (i = 0, len = items.length; i < len; i++) {}#}
-        {#                }#}
-        {#            });#}
-        {#        </script>#}
-        <!--// cart-js -->
-        <!--quantity-->
-        {#        <script>#}
-        {#            $('.value-plus').on('click', function () {#}
-        {#                var divUpd = $(this).parent().find('.value'),#}
-        {#                    newVal = parseInt(divUpd.text(), 10) + 1;#}
-        {#                divUpd.text(newVal);#}
-        {#            });#}
-
-        {#            $('.value-minus').on('click', function () {#}
-        {#                var divUpd = $(this).parent().find('.value'),#}
-        {#                    newVal = parseInt(divUpd.text(), 10) - 1;#}
-        {#                if (newVal >= 1) divUpd.text(newVal);#}
-        {#            });#}
-        {#        </script>#}
-        <!--quantity-->
-        <!--closed-->
-        {#        <script>#}
-        {#            $(document).ready(function (c) {#}
-        {#                $('.close1').on('click', function (c) {#}
-        {#                    $('.rem1').fadeOut('slow', function (c) {#}
-        {#                        $('.rem1').remove();#}
-        {#                    });#}
-        {#                });#}
-        {#            });#}
-        {#        </script>#}
         <script>
             $(document).ready(function (c) {
                 $('.close2').on('click', function (c) {

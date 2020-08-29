@@ -21,22 +21,22 @@ class ImageUploader
      * @param SluggerInterface $slugger
      * @return string
      */
-    public static function uploadImage($imageName, $targetDirectory, SluggerInterface $slugger) : string
+    public static function uploadImage($imageName, $targetDirectory, SluggerInterface $slugger): string
     {
-            $originalFilename = pathinfo($imageName->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageName->guessExtension();
+        $originalFilename = pathinfo($imageName->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageName->guessExtension();
 
-            try {
-                $imageName->move(
-                    $targetDirectory,
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                echo "Сan not upload your image: {$e->getMessage()}" . PHP_EOL;
-            }
+        try {
+            $imageName->move(
+                $targetDirectory,
+                $newFilename
+            );
+        } catch (FileException $e) {
+            echo "Сan not upload your image: {$e->getMessage()}" . PHP_EOL;
+        }
 
-            return $newFilename;
+        return $newFilename;
     }
 
 
@@ -46,11 +46,11 @@ class ImageUploader
      * @param SluggerInterface $slugger
      * @return array
      */
-    public static function uploadImages($imagesName, $targetDirectory, SluggerInterface $slugger) : array
+    public static function uploadImages($imagesName, $targetDirectory, SluggerInterface $slugger): array
     {
         $allNames = [];
-        foreach ($imagesName as $imageName){
-            $allNames[] =  ImageUploader::uploadImage($imageName, $targetDirectory, $slugger);
+        foreach ($imagesName as $imageName) {
+            $allNames[] = ImageUploader::uploadImage($imageName, $targetDirectory, $slugger);
         }
         return $allNames;
     }

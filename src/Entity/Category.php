@@ -44,27 +44,43 @@ class Category
      */
     private $image;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->title;
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -80,6 +96,10 @@ class Category
         return $this->products;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -89,6 +109,10 @@ class Category
         return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {
@@ -98,11 +122,18 @@ class Category
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
+    /**
+     * @param Category|null $parent
+     * @return $this
+     */
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
@@ -118,6 +149,10 @@ class Category
         return $this->categories;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function addCategory(self $category): self
     {
         if (!$this->categories->contains($category)) {
@@ -128,6 +163,10 @@ class Category
         return $this;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function removeCategory(self $category): self
     {
         if ($this->categories->contains($category)) {
@@ -141,11 +180,18 @@ class Category
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * @param string $image
+     * @return $this
+     */
     public function setImage(string $image): self
     {
         $this->image = $image;

@@ -68,6 +68,9 @@ class User implements UserInterface
      */
     private $ratings;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -75,16 +78,26 @@ class User implements UserInterface
         $this->ratings = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -99,7 +112,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -114,6 +127,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -126,9 +143,13 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -153,11 +174,18 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return bool
+     */
     public function isVerified(): bool
     {
         return $this->isVerified;
     }
 
+    /**
+     * @param bool $isVerified
+     * @return $this
+     */
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
@@ -173,6 +201,10 @@ class User implements UserInterface
         return $this->orders;
     }
 
+    /**
+     * @param Order $order
+     * @return $this
+     */
     public function addOrder(Order $order): self
     {
         if (!$this->orders->contains($order)) {
@@ -183,6 +215,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Order $order
+     * @return $this
+     */
     public function removeOrder(Order $order): self
     {
         if ($this->orders->contains($order)) {
@@ -196,11 +232,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -216,6 +259,10 @@ class User implements UserInterface
         return $this->comments;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -226,6 +273,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -239,11 +290,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * @param string $image
+     * @return $this
+     */
     public function setImage(string $image): self
     {
         $this->image = $image;
@@ -259,6 +317,10 @@ class User implements UserInterface
         return $this->ratings;
     }
 
+    /**
+     * @param Rating $rating
+     * @return $this
+     */
     public function addRating(Rating $rating): self
     {
         if (!$this->ratings->contains($rating)) {
@@ -269,6 +331,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Rating $rating
+     * @return $this
+     */
     public function removeRating(Rating $rating): self
     {
         if ($this->ratings->contains($rating)) {

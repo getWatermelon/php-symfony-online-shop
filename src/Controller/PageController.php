@@ -5,14 +5,23 @@ namespace App\Controller;
 use App\DTO\ContactRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class PageController
+ * @package App\Controller
+ */
 class PageController extends AbstractController
 {
 
+    /**
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @param DenormalizerInterface $denormalizer
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
     public function contactUs(
         Request $request,
         ValidatorInterface $validator,
@@ -33,6 +42,9 @@ class PageController extends AbstractController
         ]);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function aboutUs()
     {
         return $this->render('page/about.html.twig');

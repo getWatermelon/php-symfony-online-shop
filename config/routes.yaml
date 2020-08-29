@@ -73,9 +73,23 @@ app_order_history:
     controller: App\Controller\CheckoutController::getOrdersHistory
 
 comment_new:
-    path: /new/{id}
+    path: /comment/new/{id}
     methods:    [POST]
     controller: App\Controller\CommentController::newComment
+
+add_comment_reply:
+    path: /comment/reply/{id}/{commentId}
+    methods:    [POST]
+    controller: App\Controller\CommentController::addCommentReply
+
+search_products:
+    path: /search
+    methods:    [GET, POST]
+    controller: App\Controller\SearchController::search
+
+admin_index:
+    path: /admin/
+    controller: App\Controller\Admin\AdminController::index
 
 product_index:
     path: /admin/product/
@@ -102,3 +116,57 @@ product_delete:
     methods:    [DELETE]
     controller: App\Controller\Admin\ProductController::delete
 
+admin_category_index:
+    path: admnin/category
+    methods:    [GET]
+    controller: App\Controller\Admin\CategoryController::index
+
+category_new:
+    path: admnin/category/new
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\CategoryController::new
+
+category_show:
+    path: admnin/category/{id}
+    methods:    [GET]
+    controller: App\Controller\Admin\CategoryController::new
+
+category_edit:
+    path: admnin/category/{id}/edit
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\CategoryController::edit
+
+category_delete:
+    path: admnin/category/{id}
+    methods:    [DELETE]
+    controller: App\Controller\Admin\CategoryController::delete
+
+user_index:
+    path: admin/user/
+    methods:    [GET]
+    controller: App\Controller\Admin\UserController::index
+
+user_new:
+    path: admin/user/new
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\UserController::new
+
+user_show:
+    path: admin/user/{id}
+    methods:    [GET]
+    controller: App\Controller\Admin\UserController::show
+
+user_edit:
+    path: admin/user/profile/{id}/edit
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\UserController::edit
+
+profile_edit:
+    path: admin/user/profile/{id}/edit
+    methods:    [GET, POST]
+    controller: App\Controller\Admin\UserController::showProfile
+
+user_delete:
+    path: admin/user/{id}
+    methods:    [DELETE]
+    controller: App\Controller\Admin\UserController::delete

@@ -24,9 +24,7 @@ class UserType extends AbstractType
                 'multiple' => true
             ])
             ->add('image', FileType::class, ['mapped' => false, 'required' => false, 'data_class' => null])
-//            ->add('password')
-            ->add('isVerified')
-        ;
+            ->add('isVerified');
     }
 
     public function configureOptions(OptionsResolver $resolver)

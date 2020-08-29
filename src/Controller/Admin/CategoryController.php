@@ -9,16 +9,19 @@ use App\Service\Upload\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 /**
- * @Route("admnin/category")
+ * Class CategoryController
+ * @package App\Controller\Admin
  */
 class CategoryController extends AbstractController
 {
+
     /**
-     * @Route("/", name="admin_category_index", methods={"GET"})
+     * @param CategoryRepository $categoryRepository
+     * @return Response
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -27,8 +30,10 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,8 +55,10 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
+     * @param Category $category
+     * @return Response
      */
     public function show(Category $category): Response
     {
@@ -60,8 +67,12 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}/edit", name="category_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Category $category
+     * @param SluggerInterface $slugger
+     * @return Response
      */
     public function edit(Request $request, Category $category, SluggerInterface $slugger): Response
     {
@@ -72,7 +83,7 @@ class CategoryController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             $imageFile = $form->get('image')->getData();
-            if($imageFile) {
+            if ($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('category_images_directory'), $slugger);
                 $category->setImage($imageName);
             }
@@ -90,12 +101,15 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="category_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Category $category
+     * @return Response
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();

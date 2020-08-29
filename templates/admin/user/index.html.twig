@@ -7,16 +7,15 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-{#                <th>Password</th>#}
-                <th>IsVerified</th>
-                <th>Name</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>IsVerified</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
@@ -24,7 +23,6 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-{#                <td>{{ user.password }}</td>#}
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>{{ user.name }}</td>
                 <td><img src="{{ asset('uploads/user_images/' ~ user.image) }}" style="width: 150px"></td>

@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -61,7 +60,7 @@ class RegistrationController extends AbstractController
             );
 
             $imageFile = $form->get('image')->getData();
-            if($imageFile) {
+            if ($imageFile) {
                 $imageName = ImageUploader::uploadImage($imageFile, $this->getParameter('user_images_directory'), $slugger);
                 $user->setImage($imageName);
             }

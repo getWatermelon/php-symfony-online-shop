@@ -1,4 +1,4 @@
-{#{% block title %}Checkout{% endblock %}#}
+{# {% block title %}Checkout{% endblock %} #}
 
 {% block stylesheets %}
     <head>
@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
         <script>
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
@@ -25,7 +25,7 @@
         <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
         <!-- //font-awesome icons -->
         <!--Shoping cart-->
-        <link rel="stylesheet" href="css/shop.css" type="text/css" />
+        <link rel="stylesheet" href="css/shop.css" type="text/css"/>
         <!--//Shoping cart-->
         <!--checkout-->
         <link rel="stylesheet" type="text/css" href="css/checkout.css">
@@ -86,7 +86,10 @@
                             {% for item in cart.getItems %}
                                 <tr class="rem1" data-productid="{{ item.product.id }}">
                                     <td class="invert">{{ item.product.id }}</td>
-                                    <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ asset('uploads/product_images/' ~ item.getProduct.mainImage) }}" alt=" " class="img-responsive"></a></td>
+                                    <td class="invert-image"><a
+                                                href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img
+                                                    src="{{ asset('uploads/product_images/' ~ item.getProduct.mainImage) }}"
+                                                    alt=" " class="img-responsive"></a></td>
                                     <td class="invert">
                                         <div class="quantity">
                                             <div class="quantity-select">
@@ -101,7 +104,7 @@
                                     <td class="invert"><span class="item-total">{{ item.getCost }}</span> $</td>
                                     <td class="invert">
                                         <div class="rem">
-                                            <div class="close1" > </div>
+                                            <div class="close1"></div>
                                         </div>
 
                                     </td>
@@ -114,7 +117,8 @@
                         <div class="col-md-4 checkout-left-basket">
                             <h4><a href="{{ path('index') }}">Go back</a></h4>
                             <ul>
-                                <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> $</span></li>
+                                <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> $</span>
+                                </li>
                             </ul>
                         </div>
                         {% if cart.empty %}
@@ -138,7 +142,7 @@
                                                         {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Mobile number: '}}) }}
                                                     </div>
                                                 </div>
-                                                <div class="clear"> </div>
+                                                <div class="clear"></div>
                                             </div>
                                             <div class="controls">
                                                 <label class="control-label">City </label>
@@ -158,13 +162,9 @@
                                     </div>
                                 </section>
                                 {{ form_end(form) }}
-                                {#                        </form>#}
-                                {#                        <div class="checkout-right-basket">#}
-                                {#                            <a href="payment.html">Make a Payment </a>#}
-                                {#                        </div>#}
                             </div>
                             {% endif %}
-                            <div class="clearfix"> </div>
+                            <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -179,45 +179,6 @@
         <!--//js working-->
         <!-- cart-js -->
         <script src="js/minicart.js"></script>
-{#        <script>#}
-{#            toys.render();#}
-
-{#            toys.cart.on('toys_checkout', function (evt) {#}
-{#                var items, len, i;#}
-
-{#                if (this.subtotal() > 0) {#}
-{#                    items = this.items();#}
-
-{#                    for (i = 0, len = items.length; i < len; i++) {}#}
-{#                }#}
-{#            });#}
-{#        </script>#}
-        <!--// cart-js -->
-        <!--quantity-->
-{#        <script>#}
-{#            $('.value-plus').on('click', function () {#}
-{#                var divUpd = $(this).parent().find('.value'),#}
-{#                    newVal = parseInt(divUpd.text(), 10) + 1;#}
-{#                divUpd.text(newVal);#}
-{#            });#}
-
-{#            $('.value-minus').on('click', function () {#}
-{#                var divUpd = $(this).parent().find('.value'),#}
-{#                    newVal = parseInt(divUpd.text(), 10) - 1;#}
-{#                if (newVal >= 1) divUpd.text(newVal);#}
-{#            });#}
-{#        </script>#}
-        <!--quantity-->
-        <!--closed-->
-{#        <script>#}
-{#            $(document).ready(function (c) {#}
-{#                $('.close1').on('click', function (c) {#}
-{#                    $('.rem1').fadeOut('slow', function (c) {#}
-{#                        $('.rem1').remove();#}
-{#                    });#}
-{#                });#}
-{#            });#}
-{#        </script>#}
         <script>
             $(document).ready(function (c) {
                 $('.close2').on('click', function (c) {

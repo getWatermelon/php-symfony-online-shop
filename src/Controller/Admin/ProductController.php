@@ -43,13 +43,13 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $mainImageFile = $form->get('mainImage')->getData();
-            if($mainImageFile) {
+            if ($mainImageFile) {
                 $mainImageName = ImageUploader::uploadImage($mainImageFile, $this->getParameter('product_images_directory'), $slugger);
                 $product->setMainImage($mainImageName);
             }
 
             $imageFiles = $form->get('images')->getData();
-            if($imageFiles){
+            if ($imageFiles) {
                 $imagesName = ImageUploader::uploadImages($imageFiles, $this->getParameter('product_images_directory'), $slugger);
                 $product->setImages($imagesName);
             }
@@ -94,29 +94,29 @@ class ProductController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             $mainImageFile = $form->get('mainImage')->getData();
-            if($mainImageFile) {
+            if ($mainImageFile) {
                 $mainImageName = ImageUploader::uploadImage($mainImageFile, $this->getParameter('product_images_directory'), $slugger);
                 $product->setMainImage($mainImageName);
             }
 
             $imageFiles = $form->get('images')->getData();
-            if($imageFiles){
+            if ($imageFiles) {
                 $imagesName = ImageUploader::uploadImages($imageFiles, $this->getParameter('product_images_directory'), $slugger);
                 $product->setImages($imagesName);
             }
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($product);
-                $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
 
-                return $this->redirectToRoute('product_index');
-            }
-
-            return $this->render('admin/product/edit.html.twig', [
-                'product' => $product,
-                'form' => $form->createView(),
-            ]);
+            return $this->redirectToRoute('product_index');
         }
+
+        return $this->render('admin/product/edit.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @param Request $request
@@ -125,7 +125,7 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();
