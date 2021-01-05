@@ -33,6 +33,7 @@ class DatabaseSearcher implements SearcherInterface
     /**
      * @param string $query
      * @return int|mixed|string
+     *
      */
     public function searchByQuery(string $query): array
     {
