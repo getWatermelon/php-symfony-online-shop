@@ -2,4 +2,4 @@
 *.js linguist-detectable=false
 *.html linguist-detectable=false
 *.php linguist-detectable=true
-*.twig linguist-detectable=true
+*.twig linguist-detectable=false
